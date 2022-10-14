@@ -2,13 +2,8 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-const user = {
-  name: "Tom Cook",
-  email: "tom@example.com",
-  imageUrl:
-    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-};
 const navigation = [
   { name: "Home", href: "/", current: false },
   { name: "Find Match", href: "/find-match", current: true },
@@ -19,38 +14,25 @@ const navigation = [
 const userNavigation = [
   { name: "Your Profile", href: "#" },
   { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
+  { name: "Sign out", href: "/logout" },
 ];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
+
 export default function Nav() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [imageURL, setImageURL] = useState("");
+
+  useEffect(() => {
+    setName(sessionStorage.getItem("name"));
+    setEmail(sessionStorage.getItem("email"));
+    setImageURL(sessionStorage.getItem("imageURL"));
+  }, []);
+
   return (
-    // <nav className={navStyles.nav}>
-    //   <ul>
-    //     <li>
-    //       <div className="object-scale-down h-12 w-12">
-    //         <img src="/images/icon.ico" alt="logo" />
-    //       </div>
-    //     </li>
-    //     <li>
-    //       <Link href="/">Home</Link>
-    //     </li>
-    //     <li>
-    //       <Link href="/find-match">Find Match</Link>
-    //     </li>
-    //     <li>
-    //       <Link href="/about">About</Link>
-    //     </li>
-    //     <li>
-    //       <Link href="/news">News</Link>
-    //     </li>
-    //     <li>
-    //       <Link href="/locations">Locations</Link>
-    //     </li>
-    //   </ul>
-    // </nav>
     <>
       <div className="min-h-full">
         <Disclosure
@@ -106,7 +88,7 @@ export default function Nav() {
                             <span className="sr-only">Open user menu</span>
                             <img
                               className="h-8 w-8 rounded-full"
-                              src={user.imageUrl}
+                              src={imageURL}
                               alt=""
                             />
                           </Menu.Button>
@@ -185,16 +167,16 @@ export default function Nav() {
                     <div className="flex-shrink-0">
                       <img
                         className="h-10 w-10 rounded-full"
-                        src={user.imageUrl}
+                        src={imageURL}
                         alt=""
                       />
                     </div>
                     <div className="ml-3">
                       <div className="text-base font-medium leading-none text-white">
-                        {user.name}
+                        {name}
                       </div>
                       <div className="text-sm font-medium leading-none text-gray-400">
-                        {user.email}
+                        {email}
                       </div>
                     </div>
                     <button
