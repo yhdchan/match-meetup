@@ -8,7 +8,7 @@ import { Typewriter } from "react-simple-typewriter";
 const navigation = [
   { name: "News", href: "#news" },
   { name: "About", href: "#about" },
-  { name: "Contact", href: "#" },
+  { name: "Contact", href: "#contact" },
 ];
 
 export default function Home() {
@@ -63,7 +63,7 @@ export default function Home() {
                       </a>
                     ))}
                     <a
-                      href="#"
+                      href="/signup"
                       className="font-medium text-blue-600 hover:text-blue-500"
                     >
                       Sign up
@@ -118,7 +118,7 @@ export default function Home() {
                       ))}
                     </div>
                     <a
-                      href="#"
+                      href="/signup"
                       className="block w-full bg-gray-50 px-5 py-3 text-center font-medium text-blue-600 hover:bg-gray-100"
                     >
                       Sign up
@@ -142,20 +142,12 @@ export default function Home() {
                 <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                   <div className="rounded-md shadow">
                     <a
-                      href="/find-match"
+                      href="/login"
                       className="flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-8 py-3 text-base font-medium text-white hover:bg-blue-700 md:py-4 md:px-10 md:text-lg"
                     >
                       Get started
                     </a>
                   </div>
-                  {/* <div className="mt-3 sm:mt-0 sm:ml-3">
-                  <a
-                    href="#"
-                    className="flex w-full items-center justify-center rounded-md border border-transparent bg-blue-100 px-8 py-3 text-base font-medium text-blue-700 hover:bg-blue-200 md:py-4 md:px-10 md:text-lg"
-                  >
-                    Sign in
-                  </a>
-                </div> */}
                 </div>
               </div>
             </main>
@@ -164,7 +156,7 @@ export default function Home() {
         <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
           <img
             className="h-56 w-full object-cover sm:h-72  sm:mt-16 md:h-96 lg:h-full lg:w-full lg:mt-0"
-            src="https://images.unsplash.com/photo-1631495634750-0f14320bc0a7?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3348&q=80"
+            src="/images/home-cover.jpg"
             alt="teammate"
           />
         </div>
@@ -227,6 +219,87 @@ export default function Home() {
                 />
               </span>
             </p>
+          </div>
+        </div>
+      </div>
+      <div id="contact">
+        <h2 className="text-center font-bold text-4xl py-10 font-bold tracking-tight text-black sm:text-3xl md:text-4xl">
+          Contact Us
+        </h2>
+        <div className="flex items-center justify-center p-12">
+          <div className="mx-auto w-full max-w-[550px]">
+            {/* action="https://formbold.com/s/FORM_ID" method="POST" */}
+            <form>
+              <div className="mb-5">
+                <label
+                  htmlFor="name"
+                  className="mb-3 block text-base font-medium text-gray-900"
+                >
+                  Full Name
+                </label>
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  placeholder="Full Name"
+                  className="w-full rounded-md border border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-800 outline-none focus:border-blue-600 focus:shadow-md"
+                  required
+                />
+              </div>
+              <div className="mb-5">
+                <label
+                  htmlFor="email"
+                  className="mb-3 block text-base font-medium text-gray-900"
+                >
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  placeholder="example@domain.com"
+                  className="w-full rounded-md border border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-800 outline-none focus:border-blue-600 focus:shadow-md"
+                  required
+                />
+              </div>
+              <div className="mb-5">
+                <label
+                  htmlFor="subject"
+                  className="mb-3 block text-base font-medium text-gray-900"
+                >
+                  Subject
+                </label>
+                <input
+                  type="text"
+                  name="subject"
+                  id="subject"
+                  placeholder="Enter your subject"
+                  className="w-full rounded-md border border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-800 outline-none focus:border-blue-600 focus:shadow-md"
+                  required
+                />
+              </div>
+              <div className="mb-5">
+                <label
+                  htmlFor="message"
+                  className="mb-3 block text-base font-medium text-gray-900"
+                >
+                  Message
+                </label>
+                <textarea
+                  rows="4"
+                  name="message"
+                  id="message"
+                  placeholder="Type your message"
+                  className="w-full resize-none rounded-md border border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-800 outline-none focus:border-blue-600 focus:shadow-md"
+                  required
+                ></textarea>
+              </div>
+              <div>
+                <button className="hover:shadow-form rounded-md bg-blue-600 py-3 px-8 text-base font-semibold text-white outline-none">
+                  Message
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>

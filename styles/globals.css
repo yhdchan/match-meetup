@@ -20,11 +20,11 @@ a {
   box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
   body {
     @apply bg-gradient-to-b from-blue-700 via-blue-500 to-sky-400;
   }
-}
+} */
