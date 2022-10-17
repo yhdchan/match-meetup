@@ -25,10 +25,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/find-match/[_id]": [
+    "/news": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/find-match/[_id].js"
+      "static/chunks/pages/news.js"
     ]
   },
   "ampFirstPages": []
