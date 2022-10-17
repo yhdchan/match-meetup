@@ -1,6 +1,36 @@
-import React from "react";
+import { useState } from "react";
 
 const signup = () => {
+  const [newPlayer, setNewPlayer] = useState({
+    username: "",
+    firstName: "",
+    lastName: "",
+    postCode: "",
+    email: "",
+    password: "",
+    position: "",
+  });
+
+  const handleChange = (event) => {
+    setNewPlayer({ ...newPlayer, [event.target.id]: event.target.value });
+  };
+
+  const handleSubmit = async (event) => {
+    try {
+      event.preventDefault();
+      const res = await fetch("/api/players/addPlayer", {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify(newPlayer),
+      });
+      // Do something when user sign up successfully
+      const data = await res.json();
+    } catch (error) {
+      // Do something when error
+      res.json({ error });
+    }
+  };
+
   return (
     <section className="bg-white dark:bg-gray-900">
       <div className="flex justify-center min-h-screen">
@@ -19,9 +49,21 @@ const signup = () => {
             <form className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2">
               <div>
                 <input
-                  id="name"
+                  id="firstName"
                   type="text"
-                  placeholder="Full name"
+                  onChange={handleChange}
+                  placeholder="First name"
+                  className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                  required
+                />
+              </div>
+
+              <div>
+                <input
+                  id="lastName"
+                  type="text"
+                  onChange={handleChange}
+                  placeholder="Last name"
                   className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   required
                 />
@@ -31,6 +73,7 @@ const signup = () => {
                 <input
                   id="username"
                   type="text"
+                  onChange={handleChange}
                   placeholder="Username"
                   className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   required
@@ -42,9 +85,21 @@ const signup = () => {
 
               <div>
                 <input
-                  id="postcode"
+                  id="postCode"
                   type="text"
+                  onChange={handleChange}
                   placeholder="Postcode"
+                  className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                  required
+                />
+              </div>
+
+              <div>
+                <input
+                  id="position"
+                  type="text"
+                  onChange={handleChange}
+                  placeholder="Position"
                   className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   required
                 />
@@ -54,6 +109,7 @@ const signup = () => {
                 <input
                   id="email"
                   type="email"
+                  onChange={handleChange}
                   placeholder="johnsnow@example.com"
                   className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   required
@@ -67,6 +123,7 @@ const signup = () => {
                 <input
                   id="password"
                   type="password"
+                  onChange={handleChange}
                   placeholder="Password"
                   className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   required
@@ -81,6 +138,7 @@ const signup = () => {
                 <input
                   id="comfirmedPassword"
                   type="password"
+                  // onChange={handleChange}
                   placeholder="Confirm Password"
                   className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   required
@@ -92,7 +150,8 @@ const signup = () => {
 
               <button
                 type="submit"
-                // onSubmit={}
+                // onSubmit={handleSubmit}
+                onClick={handleSubmit}
                 className="flex items-center justify-between w-full px-6 py-3 tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
               >
                 <span>Sign Up </span>
