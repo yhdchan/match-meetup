@@ -1,33 +1,19 @@
-import { connectToDatabase } from "../util/mongodb";
+import PlayersList from "../components/PlayersList";
 
 export default function players({ players }) {
-  const handleClick = async () => {
-    const username = "13OCT";
-    const data = await fetch(
-      `http://localhost:3000/api/createAccount?username=${username}`
-    );
-  };
-
   return (
-    <>
-      <button onClick={() => handleClick()}>ADD</button>
-      <ol>
-        {players.map((player) => (
-          <li key={player._id}>{player.username}</li>
-        ))}
-      </ol>
-    </>
+    <div>
+      <h1>Players List</h1>
+      <PlayersList players={players} />
+    </div>
   );
 }
 
-export async function getServerSideProps(context) {
-  const { db } = await connectToDatabase();
-
-  const data = await db.collection("players").find({}).toArray();
-
-  const players123 = JSON.parse(JSON.stringify(data));
+export const getServerSideProps = async () => {
+  const res = await fetch("http://localhost:3000/api/players/allPlayers");
+  const players = res.json({ res });
 
   return {
-    props: { players: players123 },
+    props: players,
   };
-}
+};

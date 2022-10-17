@@ -1,15 +1,33 @@
-import Image from "next/image";
+import Link from "next/link";
+import articleStyles from "../styles/Article.module.css";
 
-export default function FindMatchCard() {
+export default function FindMatchCard({ match }) {
+  const time = match.date.slice(0, 16).replace("T", " ");
+
   return (
-    <>
-      <header className="bg-white shadow">
-        <div className="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-            Find Match
-          </h1>
-        </div>
-      </header>
-    </>
+    <Link href="/find-match/[_id]" as={`/find-match/${match._id}`}>
+      <a className={articleStyles.card}>
+        <h2>Date:{time}</h2>
+        <h2>Pitch:{match.pitch.name}</h2>
+      </a>
+    </Link>
   );
 }
+
+// const time = match.date.slice(0, 16).replace("T", " ");
+// return (
+//   <div>
+//     Date:{time}
+//     <br />
+//     Pitch:{match.pitch.name}
+//   </div>
+// );
+
+// return (
+//   <div className={articleStyles.grid}>
+//     {articles.map((article) => (
+//       <ArticleItem article={article} />
+//       // <h3>{article.title}</h3>
+//     ))}
+//   </div>
+// );
