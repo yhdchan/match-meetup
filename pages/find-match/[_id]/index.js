@@ -9,7 +9,6 @@ export default function index({ match }) {
 }
 
 export const getServerSideProps = async (context) => {
-  console.log(context.params._id, "<==== params");
   const res = await fetch(
     `http://localhost:3000/api/matches/getMatchById?_id=${context.params._id}`
   );
