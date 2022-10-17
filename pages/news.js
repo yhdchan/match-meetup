@@ -1,5 +1,5 @@
 import ArticleList from "../components/ArticleList";
-import { getLinkPreview, getPreviewFromContent } from "link-preview-js";
+import { getLinkPreview } from "link-preview-js";
 
 export default function News({ articles }) {
   return (
@@ -12,16 +12,15 @@ export default function News({ articles }) {
 }
 
 export const getStaticProps = async () => {
-  // const res = await fetch(
-  //   "https://jsonplaceholder.typicode.com/posts?_limit=6"
-  // );
-  // const articles = await res.json();
+  const date = new Date();
 
-  // return {
-  //   props: { articles },
-  // };
+  let day = date.getDate();
+  let month = date.getMonth() + 1;
+  let year = date.getFullYear();
+  let currentDate = `${year}-${month}-${day}`;
+
   const res = await fetch(
-    `https://newsapi.org/v2/everything?q=premier+league&from=2022-10-17&sortBy=popularity&apiKey=${process.env.NEWS_API_KEY}`
+    `https://newsapi.org/v2/everything?q=premier+league&from=${currentDate}&sortBy=popularity&apiKey=${process.env.NEWS_API_KEY}`
   );
 
   const { articles } = await res.json();
@@ -29,14 +28,14 @@ export const getStaticProps = async () => {
   const limitedArticles = articles.slice(0, 10);
 
   let urlImages = [];
-  const getWithForOf = async () => {
+  const getImageUrl = async () => {
     for (const article of limitedArticles) {
       let urlImage = await getLinkPreview(`${article.url}`);
       urlImages.push(urlImage.images[0]);
     }
     return urlImages;
   };
-  urlImages = await getWithForOf();
+  urlImages = await getImageUrl();
 
   limitedArticles.map((article, i) => (article.image = urlImages[i]));
 

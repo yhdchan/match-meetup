@@ -7,7 +7,7 @@ export default function PlayersList({ players }) {
       <h1>Players List</h1>
       <div className={articleStyles.grid}>
         {players.map((player) => (
-          <PlayerItem key={player._id} player={player} />
+          <PlayerItem player={player} />
         ))}
       </div>
     </>
