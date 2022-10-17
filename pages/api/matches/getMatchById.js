@@ -20,6 +20,22 @@ export default async function getMatchById({ query: { _id } }, res) {
         },
       },
       {
+        $lookup: {
+          from: "players",
+          localField: "home",
+          foreignField: "_id",
+          as: "homePlayers",
+        },
+      },
+      {
+        $lookup: {
+          from: "players",
+          localField: "away",
+          foreignField: "_id",
+          as: "awayPlayers",
+        },
+      },
+      {
         $match: {
           _id: new mongoose.Types.ObjectId(_id),
         },

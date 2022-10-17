@@ -59,7 +59,8 @@ export default function SingleMatch({ match }) {
                   {day}, {month} {dateArr[2]}, {dateArr[0]}
                 </p>
                 <p>{hour_12}</p>
-                <p>{match.pitch_id}</p>
+                <p>{match.pitch.name}</p>
+                <p>{match.pitch.address}</p>
               </div>
             </div>
           </div>
@@ -73,14 +74,14 @@ export default function SingleMatch({ match }) {
               <div className="flex justify-evenly space-x-4 mx-auto">
                 <div className="order border-gray-200 shadow-md w-full">
                   <h3>Home</h3>
-                  {match.home.map((item) => {
-                    return <p>{item}</p>;
+                  {match.homePlayers.map((player) => {
+                    return <p>{player.username}</p>;
                   })}
                 </div>
                 <div className="order border-gray-200 shadow-md w-full">
                   <h3>Away</h3>
-                  {match.away.map((item) => {
-                    return <p>{item}</p>;
+                  {match.awayPlayers.map((player) => {
+                    return <p>{player.username}</p>;
                   })}
                 </div>
               </div>
