@@ -40,6 +40,8 @@ export default function SingleMatch({ match }) {
 
   console.log(hour_12);
 
+  const googleMapUrl = `https://maps.google.com/maps?q=${match.pitch.address}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+
   return (
     <section>
       <div className="py-6 px-4 sm:px-6 lg:px-8">
@@ -62,6 +64,16 @@ export default function SingleMatch({ match }) {
                 <p>{match.pitch.name}</p>
                 <p>{match.pitch.address}</p>
               </div>
+              <iframe
+                width="400"
+                height="250"
+                id="gmap_canvas"
+                src={googleMapUrl}
+                frameborder="0"
+                scrolling="no"
+                marginheight="0"
+                marginwidth="0"
+              ></iframe>
             </div>
           </div>
         </div>
