@@ -25,11 +25,6 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/find-match": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/find-match.js"
-    ],
     "/find-match/[_id]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
