@@ -1,9 +1,9 @@
+import SingleMatch from "../../../components/SingleMatch";
+
 export default function index({ match }) {
-  const time = match.date.slice(0, 16).replace("T", " ");
   return (
     <div>
-      <h1>Date:{time}</h1>
-      <h1>Pitch:{match.pitch.name}</h1>
+      <SingleMatch match={match} />
     </div>
   );
 }
