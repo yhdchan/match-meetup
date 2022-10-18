@@ -6,7 +6,6 @@ import {
   MapPinIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
-import { Loader } from "@googlemaps/js-api-loader";
 
 const dayObj = {
   0: "Sunday",
@@ -44,7 +43,7 @@ export default function SingleMatch({ match }) {
   let day = dayObj[d.getDay()];
   let month = monthObj[dateArr[1]];
   let hour_12 = time.split(":")[0] < 12 ? time + "AM" : time + "PM";
-  
+
   return (
     <section>
       <div className="py-6 px-4 sm:px-6 lg:px-8">
@@ -145,16 +144,6 @@ export default function SingleMatch({ match }) {
                   </dd>
                 </div>
               </div>
-              <iframe
-                width="400"
-                height="250"
-                id="gmap_canvas"
-                src={googleMapUrl}
-                frameborder="0"
-                scrolling="no"
-                marginheight="0"
-                marginwidth="0"
-              ></iframe>
             </div>
           </div>
         </div>
