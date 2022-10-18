@@ -29,14 +29,11 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/find-match.js"
-<<<<<<< HEAD
     ],
     "/find-match/[_id]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/find-match/[_id].js"
-=======
->>>>>>> main
     ]
   },
   "ampFirstPages": []
