@@ -5,11 +5,16 @@ const login = () => {
   const { data: session, status } = useSession();
   const { push } = useRouter();
 
+  const handleLogin = () => {
+    push("/players");
+  };
+
   if (status === "authenticated") {
     setTimeout(() => {
-      sessionStorage.setItem("name", session.user.name);
-      sessionStorage.setItem("email", session.user.email);
-      sessionStorage.setItem("imageURL", session.user.image);
+      sessionStorage.setItem("user", JSON.stringify(session.user));
+      // sessionStorage.setItem("name", session.user.name);
+      // sessionStorage.setItem("email", session.user.email);
+      // sessionStorage.setItem("imageURL", session.user.image);
       push("/find-match");
     }, 1000);
 
@@ -84,7 +89,7 @@ const login = () => {
                     <div className="rounded-md shadow">
                       <button
                         type="submit"
-                        // onClick={handleSubmit}
+                        onClick={handleLogin}
                         className="flex w-full items-center justify-center rounded-md border border-transparent bg-blue-600 px-8 py-3 text-base font-medium text-white hover:bg-blue-700 md:py-4 md:px-10 md:text-lg"
                       >
                         Sign in
