@@ -1,5 +1,12 @@
 import React from "react";
 import singleMatchStyles from "../styles/SingleMatch.module.css";
+import {
+  CalendarIcon,
+  ClockIcon,
+  MapPinIcon,
+  UserIcon,
+} from "@heroicons/react/24/outline";
+import { Loader } from "@googlemaps/js-api-loader";
 
 const dayObj = {
   0: "Sunday",
@@ -37,11 +44,7 @@ export default function SingleMatch({ match }) {
   let day = dayObj[d.getDay()];
   let month = monthObj[dateArr[1]];
   let hour_12 = time.split(":")[0] < 12 ? time + "AM" : time + "PM";
-
-  console.log(hour_12);
-
-  const googleMapUrl = `https://maps.google.com/maps?q=${match.pitch.address}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
-
+  
   return (
     <section>
       <div className="py-6 px-4 sm:px-6 lg:px-8">
@@ -50,19 +53,97 @@ export default function SingleMatch({ match }) {
         </h1>
       </div>
       <div className={`${singleMatchStyles.flex_container} mx-4`}>
-        <div className="flex sm:w-screen p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-          <div id="matchDetails" className="flex px-4 py-6 sm:px-0">
-            <div className="h-96">
+        <div className={`${singleMatchStyles.flex_box} h-full`}>
+          <div className="overflow-hidden bg-white shadow-md sm:rounded-lg">
+            <div className="px-4 py-5">
+              <h3 className="text-lg font-medium leading-6 text-gray-900">
+                Match Details:
+              </h3>
+            </div>
+            <div className="border-t border-gray-200">
               <div>
-                <h2>Match Details:</h2>
-              </div>
-              <div>
-                <p>
-                  {day}, {month} {dateArr[2]}, {dateArr[0]}
-                </p>
-                <p>{hour_12}</p>
-                <p>{match.pitch.name}</p>
-                <p>{match.pitch.address}</p>
+                <div className="flex bg-gray-100 px-4 py-5">
+                  <CalendarIcon className="block h-6 w-6 mr-2" />
+                  <p className="font-medium text-gray-700">
+                    {day}, {month} {dateArr[2]}, {dateArr[0]}
+                  </p>
+                </div>
+                <div className="flex bg-white px-4 py-5">
+                  <ClockIcon className="block h-6 w-6 mr-2" />
+                  <p className="font-medium text-gray-700">{hour_12}</p>
+                </div>
+                <div className="flex bg-gray-100 px-4 py-5">
+                  <MapPinIcon className="block h-6 w-6 mr-2 my-auto" />
+                  <div className="grid gap-2">
+                    <p className="text-sm font-medium text-gray-700">
+                      {match.pitch.name}
+                    </p>
+                    <p className="mt-1 text-sm text-gray-500 col-span-2 mt-0">
+                      {match.pitch.address}
+                    </p>
+                  </div>
+                </div>
+                <iframe
+                  src={`https://maps.google.com/maps?q=${match.pitch.address}&t=&z=15&ie=UTF8&iwloc=&output=embed`}
+                  width="100%"
+                  height="250"
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="border-2 m-0"
+                ></iframe>
+                <div className="flex bg-gray-100 px-4 py-5">
+                  <UserIcon className="block h-6 w-6 mr-2 my-auto" />
+                  <div className="grid gap-2">
+                    <p className="text-sm font-medium text-gray-700">
+                      Created by
+                    </p>
+                    <p className="mt-1 text-sm text-gray-500 col-span-2 mt-0">
+                      anonym
+                    </p>
+                  </div>
+                </div>
+                <div className="bg-gray-100 px-4 py-5">
+                  <dt className="font-medium text-gray-700">Pitch Info</dt>
+                  <dd className="mt-1 text-sm text-gray-500">
+                    Contact Number: {match.pitch.contactNumber}
+                  </dd>
+                  <dd className="mt-1 text-sm text-gray-500">
+                    Surface: {match.pitch.surface}
+                  </dd>
+                  <dt className="font-medium mt-1 text-sm text-gray-500 mt-0">
+                    Facilities
+                  </dt>
+                  {match.pitch.freeParking && (
+                    <dd className="mt-1 text-sm text-gray-500">
+                      - Free Parking
+                    </dd>
+                  )}
+                  {match.pitch.goals && (
+                    <dd className="mt-1 text-sm text-gray-500">- Goals</dd>
+                  )}
+                  {match.pitch.lighting && (
+                    <dd className="mt-1 text-sm text-gray-500">- Lighting</dd>
+                  )}
+                  {match.pitch.changingRooms && (
+                    <dd className="mt-1 text-sm text-gray-500">
+                      - Changing Rooms
+                    </dd>
+                  )}
+                  {match.pitch.toilets && (
+                    <dd className="mt-1 text-sm text-gray-500">- Toilets</dd>
+                  )}
+                </div>
+                <div className="bg-white px-4 py-5">
+                  <dt className="font-medium text-gray-700">Description</dt>
+                  <dd className="mt-1 text-sm text-gray-500 mt-0">
+                    Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim
+                    incididunt cillum culpa consequat. Excepteur qui ipsum
+                    aliquip consequat sint. Sit id mollit nulla mollit nostrud
+                    in ea officia proident. Irure nostrud pariatur mollit ad
+                    adipisicing reprehenderit deserunt qui eu.
+                  </dd>
+                </div>
               </div>
               <iframe
                 width="400"
@@ -77,25 +158,93 @@ export default function SingleMatch({ match }) {
             </div>
           </div>
         </div>
-        <div className="flex sm:w-screen p-6 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-          <div id="matchPlayers" className="px-4 py-6 sm:px-0">
-            <div className="h-96">
-              <div>
-                <h2>Lineup</h2>
-              </div>
-              <div className="flex justify-evenly space-x-4 mx-auto">
-                <div className="order border-gray-200 shadow-md w-full">
-                  <h3>Home</h3>
+        <div className={`${singleMatchStyles.flex_box} h-full`}>
+          <div className="overflow-hidden bg-gray-100 shadow-md sm:rounded-lg h-full">
+            <div className="px-4 py-5 bg-white">
+              <h3 className="text-lg font-medium leading-6 text-gray-900">
+                Lineup:
+              </h3>
+            </div>
+            <div className="flex flex-row border-t border-gray-200 bg-gray-100">
+              <div className="px-4 py-5 w-1/2">
+                <dt className="font-bold text-gray-700 pb-2">Home</dt>
+                <dd className="mt-1 text-md text-gray-700">
                   {match.homePlayers.map((player) => {
-                    return <p>{player.username}</p>;
+                    return (
+                      <div key={player._id} className="py-1">
+                        <p>{player.username}</p>
+                        <p className="text-sm text-gray-500">
+                          {player.position}
+                        </p>
+                      </div>
+                    );
                   })}
-                </div>
-                <div className="order border-gray-200 shadow-md w-full">
-                  <h3>Away</h3>
+                  {match.homePlayers.length < 5 && (
+                    <p className="py-3.5">
+                      <button>Join</button>
+                    </p>
+                  )}
+                  {match.homePlayers.length < 4 && (
+                    <p className="py-3.5">
+                      <button>Join</button>
+                    </p>
+                  )}
+                  {match.homePlayers.length < 3 && (
+                    <p className="py-3.5">
+                      <button>Join</button>
+                    </p>
+                  )}
+                  {match.homePlayers.length < 2 && (
+                    <p className="py-3.5">
+                      <button>Join</button>
+                    </p>
+                  )}
+                  {match.homePlayers.length < 1 && (
+                    <p className="py-3.5">
+                      <button>Join</button>
+                    </p>
+                  )}
+                </dd>
+              </div>
+              <div className="px-4 py-5 w-1/2">
+                <dt className="font-bold text-gray-700 pb-2">Away</dt>
+                <dd className="mt-1 text-md text-gray-700">
                   {match.awayPlayers.map((player) => {
-                    return <p>{player.username}</p>;
+                    return (
+                      <div key={player._id} className="py-1">
+                        <p>{player.username}</p>
+                        <p className="text-sm text-gray-500">
+                          {player.position}
+                        </p>
+                      </div>
+                    );
                   })}
-                </div>
+                  {match.awayPlayers.length < 5 && (
+                    <p className="py-3.5">
+                      <button>Join</button>
+                    </p>
+                  )}
+                  {match.awayPlayers.length < 4 && (
+                    <p className="py-3.5">
+                      <button>Join</button>
+                    </p>
+                  )}
+                  {match.awayPlayers.length < 3 && (
+                    <p className="py-3.5">
+                      <button>Join</button>
+                    </p>
+                  )}
+                  {match.awayPlayers.length < 2 && (
+                    <p className="py-3.5">
+                      <button>Join</button>
+                    </p>
+                  )}
+                  {match.awayPlayers.length < 1 && (
+                    <p className="py-3.5">
+                      <button>Join</button>
+                    </p>
+                  )}
+                </dd>
               </div>
             </div>
           </div>

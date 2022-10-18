@@ -6,8 +6,7 @@
 }
 
 .flex_box {
-  display: flex;
-  width: 1/3;
+  width: 560px;
 }
 
 /* Responsive layout - makes a one column layout instead of a two-column layout */
