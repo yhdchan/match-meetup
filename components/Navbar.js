@@ -2,7 +2,21 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
+
+const user = {
+  _id: {
+    $oid: "6346c576d095dc0c5987396c",
+  },
+  username: "beckham007",
+  password: "25SJ3MahU7",
+  firstName: "Kyle",
+  lastName: "Naughton",
+  postCode: "M331AB",
+  email: "beckham007@gmail.com",
+  position: "defender",
+  img: "/images/player_avatar/beckham007_avatar.jpg",
+};
 
 const navigation = [
   { name: "Home", href: "/", current: false },
@@ -12,7 +26,7 @@ const navigation = [
   { name: "Players", href: "/players", current: false },
 ];
 const userNavigation = [
-  { name: "Your Profile", href: "#" },
+  { name: "Your Profile", href: `/players/${user.username}` },
   { name: "Settings", href: "#" },
   { name: "Sign out", href: "/logout" },
 ];
@@ -22,15 +36,37 @@ function classNames(...classes) {
 }
 
 export default function Nav() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [imageURL, setImageURL] = useState("");
+  // const [userData, setUserData] = useState(() => {
+  //   const user = sessionStorage.getItem("user");
+  //   return JSON.parse(user) || null;
+  // });
 
-  useEffect(() => {
-    setName(sessionStorage.getItem("name"));
-    setEmail(sessionStorage.getItem("email"));
-    setImageURL(sessionStorage.getItem("imageURL"));
-  }, []);
+  // const [name, setName] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [imageURL, setImageURL] = useState("");
+
+  // useEffect(() => {
+  //   setName(sessionStorage.getItem("name"));
+  //   setEmail(sessionStorage.getItem("email"));
+  //   setImageURL(sessionStorage.getItem("imageURL"));
+  // }, []);
+
+  // useEffect(() => {
+  //   sessionStorage.getItem("user", JSON.stringify(userData));
+  // }, [userData]);
+  //   if (session) {
+  //     setName(sessionStorage.getItem("name"));
+  //     setEmail(sessionStorage.getItem("email"));
+  //     setImageURL(sessionStorage.getItem("imageURL"));
+  //   }
+  //   if (isLoggedIn) {
+  //     setName(loggedInUser.username);
+  //     setEmail(loggedInUser.email);
+  //     setImageURL(loggedInUser.img);
+  //   }
+  // }, [setLoggedInUser]);
+
+  // const displayName = userData.username ? userData.username : userData.name;
 
   return (
     <>
@@ -84,11 +120,11 @@ export default function Nav() {
                       {/* Profile dropdown */}
                       <Menu as="div" className="relative ml-3">
                         <div>
-                          <Menu.Button className="flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                          <Menu.Button className="flex max-w-xs items-center rounded-full bg-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                             <span className="sr-only">Open user menu</span>
                             <img
                               className="h-8 w-8 rounded-full"
-                              src={imageURL}
+                              src={user.img}
                               alt=""
                             />
                           </Menu.Button>
@@ -167,16 +203,16 @@ export default function Nav() {
                     <div className="flex-shrink-0">
                       <img
                         className="h-10 w-10 rounded-full"
-                        src={imageURL}
-                        alt=""
+                        src={user.img}
+                        alt="profile"
                       />
                     </div>
                     <div className="ml-3">
                       <div className="text-base font-medium leading-none text-white">
-                        {name}
+                        {user.username}
                       </div>
                       <div className="text-sm font-medium leading-none text-gray-400">
-                        {email}
+                        {user.email}
                       </div>
                     </div>
                     <button

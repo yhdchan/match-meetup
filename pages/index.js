@@ -167,9 +167,9 @@ export default function Home({ articles }) {
           Latest Football News
         </h1>
         <div className={homeStyles.container}>
-          {articles.map((article) => {
+          {articles.map((article, i) => {
             return (
-              <Link href="/article/[id]" as={`/article/${article.id}`}>
+              <Link key={i} href="/article/[id]" as={`/article/${article.id}`}>
                 <a className={homeStyles.box}>
                   <img src={article.image} alt={article.publishedAt} />
                   <span>{article.title}</span>

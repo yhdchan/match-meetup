@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 const logout = () => {
   const { data: session, status } = useSession();
   const { push } = useRouter();
-  console.log(session);
 
   if (session) {
     signOut();

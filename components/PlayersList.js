@@ -1,15 +1,12 @@
 import PlayerItem from "./PlayerItem";
-import articleStyles from "../styles/Article.module.css";
+import playersListStyles from "../styles/PlayersList.module.css";
 
 export default function PlayersList({ players }) {
   return (
-    <>
-      <h1>Players List</h1>
-      <div className={articleStyles.grid}>
-        {players.map((player) => (
-          <PlayerItem player={player} />
-        ))}
-      </div>
-    </>
+    <div className={`${playersListStyles.flex_container} px-6 py-3`}>
+      {players.map((player) => (
+        <PlayerItem key={player._id} player={player} />
+      ))}
+    </div>
   );
 }
