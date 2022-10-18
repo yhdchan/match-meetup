@@ -4,6 +4,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import homeStyles from "../styles/Home.module.css";
 import { Typewriter } from "react-simple-typewriter";
+import Head from "next/head";
 
 const navigation = [
   { name: "News", href: "#news" },
@@ -14,6 +15,10 @@ const navigation = [
 export default function Home() {
   return (
     <>
+      <Head>
+        <title>Match Meetup</title>
+        <meta name="matchMeetup" content="football, match, meetup" />
+      </Head>
       <div className="relative overflow-hidden bg-white">
         <div className="mx-auto max-w-7xl">
           <div className="relative z-10 bg-white pb-8 sm:pb-16 md:pb-20 lg:w-full lg:max-w-2xl lg:pb-28 xl:pb-32">

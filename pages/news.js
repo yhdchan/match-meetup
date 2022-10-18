@@ -13,11 +13,10 @@ export default function News({ articles }) {
 
 export const getStaticProps = async () => {
   const date = new Date();
-
-  let day = date.getDate();
-  let month = date.getMonth() + 1;
-  let year = date.getFullYear();
-  let currentDate = `${year}-${month}-${day}`;
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+  const currentDate = `${year}-${month}-${day}`;
 
   const res = await fetch(
     `https://newsapi.org/v2/everything?q=premier+league&from=${currentDate}&sortBy=popularity&apiKey=${process.env.NEWS_API_KEY}`
@@ -30,7 +29,7 @@ export const getStaticProps = async () => {
   let urlImages = [];
   const getImageUrl = async () => {
     for (const article of limitedArticles) {
-      let urlImage = await getLinkPreview(`${article.url}`);
+      const urlImage = await getLinkPreview(`${article.url}`);
       urlImages.push(urlImage.images[0]);
     }
     return urlImages;
