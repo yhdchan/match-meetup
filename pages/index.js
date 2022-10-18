@@ -4,6 +4,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import homeStyles from "../styles/Home.module.css";
 import { Typewriter } from "react-simple-typewriter";
+import { getLinkPreview } from "link-preview-js";
 
 const navigation = [
   { name: "News", href: "#news" },
@@ -11,7 +12,7 @@ const navigation = [
   { name: "Contact", href: "#contact" },
 ];
 
-export default function Home() {
+export default function Home({ articles }) {
   return (
     <>
       <div className="relative overflow-hidden bg-white">
@@ -166,6 +167,18 @@ export default function Home() {
           Latest Football News
         </h1>
         <div className={homeStyles.container}>
+          {articles.map((article) => {
+            return (
+              <Link href="/article/[id]" as={`/article/${article.id}`}>
+                <a className={homeStyles.box}>
+                  <img src={article.image} alt={article.publishedAt} />
+                  <span>{article.title}</span>
+                </a>
+              </Link>
+            );
+          })}
+        </div>
+        {/* <div className={homeStyles.container}>
           <div className={homeStyles.box}>
             <img
               src="https://images.unsplash.com/photo-1508098682722-e99c43a406b2?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2340&q=80"
@@ -187,7 +200,7 @@ export default function Home() {
             />
             <span>New3</span>
           </div>
-        </div>
+        </div> */}
       </div>
       <div id="about" className="h-screen w-screen">
         <div className="mx-auto mt-10 max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
@@ -306,3 +319,36 @@ export default function Home() {
     </>
   );
 }
+
+export const getStaticProps = async () => {
+  const date = new Date();
+
+  let day = date.getDate();
+  let month = date.getMonth() + 1;
+  let year = date.getFullYear();
+  let currentDate = `${year}-${month}-${day}`;
+
+  const res = await fetch(
+    `https://newsapi.org/v2/everything?q=premier+league&from=${currentDate}&sortBy=popularity&apiKey=${process.env.NEWS_API_KEY}`
+  );
+
+  const { articles } = await res.json();
+
+  const homeArticles = articles.slice(0, 3);
+
+  let urlImages = [];
+  const getImageUrl = async () => {
+    for (const article of homeArticles) {
+      let urlImage = await getLinkPreview(`${article.url}`);
+      urlImages.push(urlImage.images[0]);
+    }
+    return urlImages;
+  };
+  urlImages = await getImageUrl();
+
+  homeArticles.map((article, i) => (article.image = urlImages[i]));
+
+  return {
+    props: { articles: homeArticles },
+  };
+};
