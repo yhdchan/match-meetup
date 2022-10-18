@@ -7,8 +7,8 @@ import { useEffect, useState } from "react";
 const navigation = [
   { name: "Home", href: "/", current: false },
   { name: "Find Match", href: "/find-match", current: true },
+  { name: "Create Match", href: "/create-match", current: false },
   { name: "News", href: "/news", current: false },
-  { name: "Teams", href: "/teams", current: false },
   { name: "Players", href: "/players", current: false },
 ];
 const userNavigation = [

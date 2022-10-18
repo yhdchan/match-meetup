@@ -4,9 +4,11 @@ import { Schema, model, models } from "mongoose";
 const matchSchema = new Schema({
   pitch_id: {
     type: ObjectId,
-    required: true,
   },
-  Date: {
+  pitch_name: {
+    type: String,
+  },
+  date: {
     type: Date,
     required: true,
   },
