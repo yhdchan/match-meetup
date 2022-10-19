@@ -8,21 +8,8 @@ import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 import { useContext } from "react";
 import { UserContext } from "../contexts/User";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import Image from "next/image";
-
-// const user = {
-//   _id: {
-//     $oid: "6346c576d095dc0c5987396c",
-//   },
-//   username: "beckham007",
-//   password: "25SJ3MahU7",
-//   firstName: "Kyle",
-//   lastName: "Naughton",
-//   postCode: "M331AB",
-//   email: "beckham007@gmail.com",
-//   position: "defender",
-//   img: "/images/player_avatar/beckham007_avatar.jpg",
-// };
 
 const navigation = [
   { name: "Home", href: "/", current: false },
@@ -113,6 +100,16 @@ export default function Nav() {
   let avatar = session ? loggedInUser.image : loggedInUser.img;
   let email = session ? loggedInUser.email : loggedInUser.email;
   let name = session ? loggedInUser.name : loggedInUser.username;
+  const { asPath } = useRouter();
+
+  useEffect(() => {
+    navigation.forEach((item) => (item.current = false));
+    for (let i = 0; i < navigation.length; i++) {
+      if (asPath === navigation[i].href) {
+        navigation[i].current = true;
+      }
+    }
+  }, [asPath]);
 
   return (
     <>
@@ -135,11 +132,10 @@ export default function Nav() {
                     </div>
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
-                        {navigation.map((item, index, arr) => (
+                        {navigation.map((item) => (
                           <a
                             key={item.name}
                             href={item.href}
-                            // onClick={(e) => handleClick(e)}
                             className={classNames(
                               item.current
                                 ? "bg-gray-900 text-white"
