@@ -20,6 +20,14 @@ a {
   box-sizing: border-box;
 }
 
+@layer base {
+  body {
+    @apply text-stone-800 bg-white dark:text-slate-100 dark:bg-gray-900;
+  }
+}
+
+/* @apply text-stone-800 bg-slate-100 dark:text-slate-100 dark:bg-gray-900; */
+
 /* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

@@ -7,7 +7,7 @@ export default function SinglePlayer({ player }) {
 
   return (
     <div
-      className={`${playersListStyles.flex_box} bg-gray-100 flex flex-col items-center justify-center p-4 shadow-lg rounded-2xl w-64 md:w-64 lg:w-64`}
+      className={`${playersListStyles.flex_box} bg-gray-800 flex flex-col items-center justify-center p-4 shadow-lg rounded-2xl w-64 md:w-64 lg:w-64`}
     >
       <div className="profile mx-auto  py-2 w-16 ">
         <a href={`/players/${player.username}`}>
