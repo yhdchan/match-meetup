@@ -7,6 +7,8 @@ import {
   PlusCircleIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
+import { useContext } from "react";
+import { UserContext } from "../contexts/User";
 
 const dayObj = {
   0: "Sunday",
@@ -45,10 +47,10 @@ export default function SingleMatch({ match }) {
   let month = monthObj[dateArr[1]];
   let hour_12 = time.split(":")[0] < 12 ? time + "AM" : time + "PM";
   console.log(document.cookie);
-  // const [join, setJoin] = useState(false);
+  const { loggedInUser } = useContext(UserContext);
 
   const des = match.pitch.description.split(".");
-  console.log(des);
+  console.log(loggedInUser);
 
   return (
     <section>
