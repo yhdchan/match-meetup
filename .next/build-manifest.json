@@ -25,10 +25,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/create-match": [
+    "/find-match": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/create-match.js"
+      "static/chunks/pages/find-match.js"
+    ],
+    "/news": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/news.js"
     ]
   },
   "ampFirstPages": []
