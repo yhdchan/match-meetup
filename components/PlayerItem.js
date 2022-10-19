@@ -25,6 +25,9 @@ export default function SinglePlayer({ player }) {
       <div className="position text-gray-500 mt-2">
         <p>{player.position}</p>
       </div>
+      <div className="position text-gray-500 mt-2">
+        <p>{player.motm_count}</p>
+      </div>
       <div className="w-full mt-4">
         <button
           onClick={() => setLoggedInUser(player)}

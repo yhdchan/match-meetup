@@ -2,9 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/signup": "pages/signup.js",
-  "/find-match": "pages/find-match.js",
-  "/api/players/addPlayer": "pages/api/players/addPlayer.js",
-  "/api/matches/allMatches": "pages/api/matches/allMatches.js",
-  "/news": "pages/news.js"
+  "/news": "pages/news.js",
+  "/api/players/allPlayers": "pages/api/players/allPlayers.js",
+  "/players": "pages/players.js"
 }

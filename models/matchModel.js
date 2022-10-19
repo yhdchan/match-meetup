@@ -18,6 +18,10 @@ const matchSchema = new Schema({
   away: {
     type: [ObjectId],
   },
+  created_by: {
+    type: ObjectId,
+    required: true,
+  },
 });
 
 const Match = models.Match || model("Match", matchSchema);
