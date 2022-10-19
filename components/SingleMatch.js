@@ -44,6 +44,9 @@ export default function SingleMatch({ match }) {
   let month = monthObj[dateArr[1]];
   let hour_12 = time.split(":")[0] < 12 ? time + "AM" : time + "PM";
 
+  const des = match.pitch.description.split(".");
+  console.log(des);
+
   return (
     <section>
       <div className="py-6 px-4 sm:px-6 lg:px-8">
@@ -136,11 +139,11 @@ export default function SingleMatch({ match }) {
                 <div className="bg-white px-4 py-5">
                   <dt className="font-medium text-gray-700">Description</dt>
                   <dd className="mt-1 text-sm text-gray-500 mt-0">
-                    Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim
-                    incididunt cillum culpa consequat. Excepteur qui ipsum
-                    aliquip consequat sint. Sit id mollit nulla mollit nostrud
-                    in ea officia proident. Irure nostrud pariatur mollit ad
-                    adipisicing reprehenderit deserunt qui eu.
+                    <ul>
+                      {des.map((d) => {
+                        return <li key={d}>- {d}</li>;
+                      })}
+                    </ul>
                   </dd>
                 </div>
               </div>
