@@ -7,7 +7,6 @@ import { Typewriter } from "react-simple-typewriter";
 import Head from "next/head";
 import { getLinkPreview } from "link-preview-js";
 
-
 const navigation = [
   { name: "News", href: "#news" },
   { name: "About", href: "#about" },
@@ -176,8 +175,16 @@ export default function Home({ articles }) {
           {articles.map((article, i) => {
             return (
               <Link key={i} href="/article/[id]" as={`/article/${article.id}`}>
-                <a className={homeStyles.box}>
-                  <img src={article.image} alt={article.publishedAt} />
+                <a
+                  href={article.url}
+                  target="_blank"
+                  className={homeStyles.box}
+                >
+                  <img
+                    src={article.image}
+                    alt={article.publishedAt}
+                    className="object-fill"
+                  />
                   <span>{article.title}</span>
                 </a>
               </Link>

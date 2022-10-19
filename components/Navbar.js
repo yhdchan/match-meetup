@@ -5,21 +5,24 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
+import { useContext } from "react";
+import { UserContext } from "../contexts/User";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 
-const user = {
-  _id: {
-    $oid: "6346c576d095dc0c5987396c",
-  },
-  username: "beckham007",
-  password: "25SJ3MahU7",
-  firstName: "Kyle",
-  lastName: "Naughton",
-  postCode: "M331AB",
-  email: "beckham007@gmail.com",
-  position: "defender",
-  img: "/images/player_avatar/beckham007_avatar.jpg",
-};
+// const user = {
+//   _id: {
+//     $oid: "6346c576d095dc0c5987396c",
+//   },
+//   username: "beckham007",
+//   password: "25SJ3MahU7",
+//   firstName: "Kyle",
+//   lastName: "Naughton",
+//   postCode: "M331AB",
+//   email: "beckham007@gmail.com",
+//   position: "defender",
+//   img: "/images/player_avatar/beckham007_avatar.jpg",
+// };
 
 const navigation = [
   { name: "Home", href: "/", current: false },
@@ -28,19 +31,22 @@ const navigation = [
   { name: "News", href: "/news", current: false },
   { name: "Players", href: "/players", current: false },
 ];
-const userNavigation = [
-  { name: "Your Profile", href: `/players/${user.username}` },
-  { name: "Settings", href: "#" },
-  { name: "Sign out", href: "/logout" },
-];
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function Nav() {
+  const { loggedInUser, setLoggedInUser, isLoggedIn } = useContext(UserContext);
+  const { data: session } = useSession();
   const { systemTheme, theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+
+  const userNavigation = [
+    { name: "Your Profile", href: `/players/${loggedInUser.username}` },
+    { name: "Settings", href: "#" },
+    { name: "Sign out", href: "/logout" },
+  ];
 
   useEffect(() => {
     setMounted(true);
@@ -101,6 +107,12 @@ export default function Nav() {
   // }, [setLoggedInUser]);
 
   // const displayName = userData.username ? userData.username : userData.name;
+  // const handleClick = (e) => {
+  //   console.log(e);
+  // };
+  let avatar = session ? loggedInUser.image : loggedInUser.img;
+  let email = session ? loggedInUser.email : loggedInUser.email;
+  let name = session ? loggedInUser.name : loggedInUser.username;
 
   return (
     <>
@@ -123,10 +135,11 @@ export default function Nav() {
                     </div>
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
-                        {navigation.map((item) => (
+                        {navigation.map((item, index, arr) => (
                           <a
                             key={item.name}
                             href={item.href}
+                            // onClick={(e) => handleClick(e)}
                             className={classNames(
                               item.current
                                 ? "bg-gray-900 text-white"
@@ -159,7 +172,8 @@ export default function Nav() {
                             <span className="sr-only">Open user menu</span>
                             <img
                               className="h-8 w-8 rounded-full"
-                              src={user.img}
+                              src={avatar}
+                              referrerPolicy="no-referrer"
                               alt=""
                             />
                           </Menu.Button>
@@ -238,16 +252,17 @@ export default function Nav() {
                     <div className="flex-shrink-0">
                       <img
                         className="h-10 w-10 rounded-full"
-                        src={user.img}
+                        src={avatar}
+                        referrerPolicy="no-referrer"
                         alt="profile"
                       />
                     </div>
                     <div className="ml-3">
                       <div className="text-base font-medium leading-none text-white">
-                        {user.username}
+                        {name}
                       </div>
                       <div className="text-sm font-medium leading-none text-gray-400">
-                        {user.email}
+                        {email}
                       </div>
                     </div>
                     <button

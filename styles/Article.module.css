@@ -1,3 +1,23 @@
+.flex_container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.flex_box {
+  width: 800px;
+  margin: 0% auto;
+}
+
+@media (max-width: 800px) {
+  .flex_container {
+    flex-direction: column;
+  }
+  .flex_box {
+    width: 100%;
+  }
+}
+
 /* .card {
   margin: 1rem;
   padding: 1.5rem;
@@ -10,7 +30,7 @@
   max-width: 300px;
 } */
 
-.card:hover,
+/* .card:hover,
 .card:focus,
 .card:active {
   color: #0070f3;
@@ -26,7 +46,7 @@
   margin: 0;
   font-size: 1.25rem;
   line-height: 1.5;
-}
+} */
 
 /* .logo {
   height: 1em;
