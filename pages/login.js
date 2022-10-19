@@ -37,7 +37,7 @@ const login = () => {
     <>
       <div className="relative overflow-hidden bg-inherit">
         <div className="mx-auto max-w-7xl h-full">
-          <div className="relative z-10 bg-inherit pb-8 sm:pb-16 md:pb-20 lg:w-full lg:max-w-2xl lg:pb-28 xl:pb-32 h-full">
+          <div className="relative z-10 bg-white pb-8 sm:pb-16 md:pb-20 lg:w-full lg:max-w-2xl lg:pb-28 xl:pb-32 h-full dark:bg-gray-900">
             <main className="mx-auto pt-10 max-w-7xl px-4 sm:pt-12 sm:px-6 md:pt-16 lg:pt-20 lg:px-8 xl:pt-28">
               <div className="sm:text-center lg:text-left">
                 <h1 className="text-2xl font-bold tracking-tight text-inherit sm:text-4xl md:text-5xl">

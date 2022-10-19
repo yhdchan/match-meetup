@@ -21,11 +21,11 @@ export default function Home({ articles }) {
         <title>Match Meetup</title>
         <meta name="matchMeetup" content="football, match, meetup" />
       </Head>
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden ">
         <div className="mx-auto max-w-7xl">
-          <div className="relative z-10 bg-inherit pb-8 sm:pb-16 md:pb-20 lg:w-full lg:max-w-2xl lg:pb-28 xl:pb-32">
+          <div className="relative z-10 bg-white pb-8 sm:pb-16 md:pb-20 lg:w-full lg:max-w-2xl lg:pb-28 xl:pb-32 dark:bg-gray-900">
             <svg
-              className="absolute inset-y-0 right-0 hidden h-full w-48 translate-x-1/2 transform text-gray-900 lg:block"
+              className="absolute text-white inset-y-0 right-0 hidden h-full w-48 translate-x-1/2 transform dark:text-gray-900 lg:block"
               fill="currentColor"
               viewBox="0 0 100 100"
               preserveAspectRatio="none"
@@ -35,7 +35,7 @@ export default function Home({ articles }) {
             </svg>
 
             <Popover>
-              <div className="relative px-4 pt-6 sm:px-6 lg:px-8 bg-gray-800">
+              <div className="relative px-4 pt-6 sm:px-6 lg:px-8 bg-white dark:bg-gray-800 dark:lg:bg-gray-900">
                 <nav
                   className="relative flex items-center justify-between shadow-sm sm:h-10 lg:justify-start"
                   aria-label="Global"
