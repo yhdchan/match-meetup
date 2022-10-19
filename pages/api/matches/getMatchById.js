@@ -36,6 +36,14 @@ export default async function getMatchById({ query: { _id } }, res) {
         },
       },
       {
+        $lookup: {
+          from: "players",
+          localField: "created_by",
+          foreignField: "_id",
+          as: "created_by_username",
+        },
+      },
+      {
         $match: {
           _id: new mongoose.Types.ObjectId(_id),
         },

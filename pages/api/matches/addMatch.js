@@ -13,8 +13,9 @@ export default async function addMatch(req, res) {
     body.date = body.date + "T" + body.time + ":00.000+00:00";
     delete body.time;
 
-    const newMatch = await Match.create(body);
-    res.status(201).json(newMatch);
+    const newMatch = await Match.create(body).then((result) =>
+      res.status(201).json(result)
+    );
   } catch (error) {
     res.json({ error });
   }

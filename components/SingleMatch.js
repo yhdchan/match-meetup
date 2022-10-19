@@ -46,12 +46,14 @@ export default function SingleMatch({ match }) {
   let day = dayObj[d.getDay()];
   let month = monthObj[dateArr[1]];
   let hour_12 = time.split(":")[0] < 12 ? time + "AM" : time + "PM";
-  console.log(document.cookie);
+  // console.log(document.cookie, "<--- cookie");
   const { loggedInUser } = useContext(UserContext);
 
   const des = match.pitch.description.split(".");
 
-  console.log(loggedInUser);
+  // console.log(loggedInUser);
+  // console.log(match, "<--- match");
+  // console.log(match.created_by_username[0]);
 
   return (
     <section>
@@ -107,7 +109,8 @@ export default function SingleMatch({ match }) {
                       Created by
                     </p>
                     <p className="mt-1 text-sm text-gray-500 col-span-2 mt-0">
-                      {match.created_by}
+                      <img src={match.created_by_username[0].img}></img>
+                      {match.created_by_username[0].username}
                     </p>
                   </div>
                 </div>

@@ -1,9 +1,16 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useContext } from "react";
+import { UserContext } from "../contexts/User";
+import { useForm } from "react-hook-form";
 
 export default function createMatch({ pitches }) {
-  const [newMatch, setNewMatch] = useState({});
   const router = useRouter();
+  const { loggedInUser } = useContext(UserContext);
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
 
   const date = new Date();
   const day = date.getDate();
@@ -11,29 +18,24 @@ export default function createMatch({ pitches }) {
   const year = date.getFullYear();
   const currentDate = `${year}-${month}-${day}`;
 
-  const handleSubmit = async (event) => {
+  const sendToDb = async (newMatch) => {
     try {
-      event.preventDefault();
-
-      setNewMatch({
-        date: document.getElementById("date").value,
-        time: document.getElementById("time").value,
-        pitch_name: document.getElementById("pitch").value,
-      });
-
       const res = await fetch("/api/matches/addMatch", {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(newMatch),
       });
-      // Do something when user sign up successfully
       const newMatchRes = await res.json();
-      if (Object.keys(newMatchRes).length === 7)
+      if (Object.keys(newMatchRes).length === 8)
         router.push(`/find-match/${newMatchRes._id}`);
     } catch (error) {
-      // Do something when error
       res.json({ error });
     }
+  };
+
+  const onSubmit = (data) => {
+    data.created_by = loggedInUser._id.$oid;
+    sendToDb(data);
   };
 
   return (
@@ -58,22 +60,23 @@ export default function createMatch({ pitches }) {
             </div>
           </div>
           <div className="mt-5 md:col-span-2 md:mt-0 px-2">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <div className="shadow sm:overflow-hidden sm:rounded-md">
                 <div className="rounded-md space-y-6 bg-gray-800 px-4 py-5 sm:p-6">
                   <div>
                     <label
-                      htmlFor="pitch"
+                      htmlFor="pitch_name"
                       className="block text-sm font-medium text-white"
                     >
                       Pitch
                     </label>
                     <select
-                      id="pitch"
-                      name="pitch"
+                      id="pitch_name"
+                      name="pitch_name"
                       autoComplete="pitch-name"
                       className="mt-1 block w-full rounded-md bg-inherit border border-gray-300 py-2 px-3 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm bg-gray-500 "
                       defaultValue=""
+                      {...register("pitch_name", { required: true })}
                       required
                     >
                       <option value="" disabled hidden>
@@ -101,6 +104,8 @@ export default function createMatch({ pitches }) {
                       min={currentDate}
                       max="2023-12-31"
                       className="mt-1 block w-full rounded-md border border-gray-300 bg-inherit py-2 px-3 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm bg-gray-500 "
+                      {...register("date", { required: true })}
+
                       required
                     ></input>
                   </div>
@@ -119,6 +124,7 @@ export default function createMatch({ pitches }) {
                       min="09:00"
                       max="22:00"
                       className="mt-1 block w-full rounded-md border border-gray-300 bg-inherit py-2 px-3 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm bg-gray-500 "
+                      {...register("time", { required: true })}
                       required
                     ></input>
                   </div>
@@ -137,7 +143,7 @@ export default function createMatch({ pitches }) {
                         rows="8"
                         className="bg-gray-500 mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-2 py-1"
                         placeholder="Description..."
-                        // onChange={handleChange}
+                        // {...register("description")}
                       ></textarea>
                     </div>
                     <p className="mt-2 text-sm text-gray-100">
