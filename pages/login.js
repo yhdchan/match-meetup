@@ -1,17 +1,21 @@
 import { useSession, signIn } from "next-auth/react";
 import { useRouter } from "next/router";
+import { useContext } from "react";
+import { UserContext } from "../contexts/User";
 
 const login = () => {
+  const { loggedInUser, setLoggedInUser, isLoggedIn } = useContext(UserContext);
   const { data: session, status } = useSession();
   const { push } = useRouter();
 
   const handleLogin = () => {
-    push("/players");
+    push("/find-match");
   };
 
   if (status === "authenticated") {
     setTimeout(() => {
-      sessionStorage.setItem("user", JSON.stringify(session.user));
+      setLoggedInUser(session.user);
+      // sessionStorage.setItem("user", JSON.stringify(session.user));
       // sessionStorage.setItem("name", session.user.name);
       // sessionStorage.setItem("email", session.user.email);
       // sessionStorage.setItem("imageURL", session.user.image);

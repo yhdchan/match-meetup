@@ -3,6 +3,7 @@ import Navbar from "../components/Navbar";
 import "../styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "next-themes";
+import { UserProvider } from "../contexts/User";
 
 function MyApp({ Component, pageProps, session }) {
   const { asPath } = useRouter();
@@ -12,14 +13,16 @@ function MyApp({ Component, pageProps, session }) {
       : false;
 
   return (
-    <SessionProvider session={session}>
-      <ThemeProvider enableSystem={true} attribute="class">
-        <>
-          {!isHome && <Navbar />}
-          <Component {...pageProps} />
-        </>
-      </ThemeProvider>
-    </SessionProvider>
+    <UserProvider>
+      <SessionProvider session={session}>
+        <ThemeProvider enableSystem={true} attribute="class">
+          <>
+            {!isHome && <Navbar />}
+            <Component {...pageProps} />
+          </>
+        </ThemeProvider>
+      </SessionProvider>
+    </UserProvider>
   );
 }
 
