@@ -2,7 +2,7 @@ import Match from "../../../models/matchModel";
 import connectMongo from "../../../util/connectMongo";
 const mongoose = require("mongoose");
 
-export default async function addMatch(
+export default async function updateMatchSpot(
   { query: { match_id, _id, side } },
   res
 ) {
@@ -18,7 +18,7 @@ export default async function addMatch(
             home: [_id],
           },
         }
-      ).then((result) => res.status(201).json(result));
+      ).then((result) => res.status(200).json(result));
     } else {
       const updatedAway = await Match.updateOne(
         {
@@ -29,7 +29,7 @@ export default async function addMatch(
             away: [_id],
           },
         }
-      ).then((result) => res.status(201).json(result));
+      ).then((result) => res.status(200).json(result));
     }
   } catch (error) {
     res.json({ error });

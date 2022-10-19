@@ -6,7 +6,7 @@ export default function players({ players }) {
       <header className="bg-inherit">
         <div className="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
           <h1 className="pl-2 text-3xl font-bold tracking-tight text-inherit">
-            Players List
+            Players Ranking
           </h1>
         </div>
       </header>
