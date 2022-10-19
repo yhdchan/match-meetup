@@ -21,11 +21,11 @@ export default function Home({ articles }) {
         <title>Match Meetup</title>
         <meta name="matchMeetup" content="football, match, meetup" />
       </Head>
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden ">
         <div className="mx-auto max-w-7xl">
-          <div className="relative z-10 bg-inherit pb-8 sm:pb-16 md:pb-20 lg:w-full lg:max-w-2xl lg:pb-28 xl:pb-32">
+          <div className="relative z-10 bg-white pb-8 sm:pb-16 md:pb-20 lg:w-full lg:max-w-2xl lg:pb-28 xl:pb-32 dark:bg-gray-900">
             <svg
-              className="absolute inset-y-0 right-0 hidden h-full w-48 translate-x-1/2 transform text-gray-900 lg:block"
+              className="absolute text-white inset-y-0 right-0 hidden h-full w-48 translate-x-1/2 transform dark:text-gray-900 lg:block"
               fill="currentColor"
               viewBox="0 0 100 100"
               preserveAspectRatio="none"
@@ -35,7 +35,7 @@ export default function Home({ articles }) {
             </svg>
 
             <Popover>
-              <div className="relative px-4 pt-6 sm:px-6 lg:px-8 bg-gray-800">
+              <div className="relative px-4 pt-6 sm:px-6 lg:px-8 bg-white dark:bg-gray-800 dark:lg:bg-gray-900">
                 <nav
                   className="relative flex items-center justify-between shadow-sm sm:h-10 lg:justify-start"
                   aria-label="Global"
@@ -88,7 +88,7 @@ export default function Home({ articles }) {
                   focus
                   className="absolute inset-x-0 top-0 z-10 origin-top-right transform p-2 transition md:hidden"
                 >
-                  <div className="overflow-hidden rounded-lg bg-white shadow-md ring-1 ring-black ring-opacity-5">
+                  <div className="overflow-hidden rounded-lg bg-white shadow-md ring-1 ring-black ring-opacity-5 dark:bg-gray-800">
                     <div className="flex items-center justify-between px-5 pt-4 w-full">
                       <div className="w-1/3">
                         <h1 className="font-bold text-xl cursor-pointer">
@@ -103,7 +103,7 @@ export default function Home({ articles }) {
                         />
                       </div>
                       <div className="justify-self-end -mr-2">
-                        <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+                        <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 dark:bg-gary-800">
                           <span className="sr-only">Close main menu</span>
                           <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                         </Popover.Button>
@@ -114,7 +114,7 @@ export default function Home({ articles }) {
                         <a
                           key={item.name}
                           href={item.href}
-                          className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+                          className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-500 dark:hover:bg-gray-900 text-gray-500"
                         >
                           {item.name}
                         </a>
@@ -122,7 +122,7 @@ export default function Home({ articles }) {
                     </div>
                     <a
                       href="/signup"
-                      className="block w-full bg-gray-50 px-5 py-3 text-center font-medium text-blue-600 hover:bg-gray-100"
+                      className="block w-full bg-gray-50 px-5 py-3 text-center font-medium text-blue-600 hover:bg-gray-100 dark:bg-gray-700"
                     >
                       Sign up
                     </a>
