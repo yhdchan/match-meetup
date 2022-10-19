@@ -38,59 +38,130 @@ export default function createMatch({ pitches }) {
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <h1>Create a Match</h1>
-        <br />
-        <div>
-          <label htmlFor="pitch">Pitch:</label>
-          <select name="pitch" id="pitch">
-            {pitches.map((pitch) => (
-              <option key={pitch._id} value={pitch.name}>
-                {pitch.name}
-              </option>
-            ))}
-          </select>
+      <header className="bg-white shadow">
+        <div className="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
+          <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+            Create a Match
+          </h1>
         </div>
-        <br />
-        <div>
-          <label htmlFor="date">Date:</label>
-          <input
-            type="date"
-            id="date"
-            name="date"
-            min={currentDate}
-            max="2023-12-31"
-            required
-          ></input>
+      </header>
+      <div>
+        <div className="bg-gray-100 md:grid md:grid-cols-3 md:gap-6 py-2">
+          <div className="md:col-span-1">
+            <div className="px-4 sm:px-6 py-2">
+              <h3 className="text-lg font-medium leading-6 text-gray-900">
+                New Match
+              </h3>
+              <p className="mt-1 text-sm text-gray-600">
+                Please fill out the form completely and click confirm
+              </p>
+            </div>
+          </div>
+          <div className="mt-5 md:col-span-2 md:mt-0 px-2">
+            <form onSubmit={handleSubmit}>
+              <div className="shadow sm:overflow-hidden sm:rounded-md">
+                <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
+                  <div>
+                    <label
+                      htmlFor="pitch"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Pitch
+                    </label>
+                    <select
+                      id="pitch"
+                      name="pitch"
+                      autoComplete="pitch-name"
+                      className="mt-1 block w-full rounded-md bg-white border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+                      defaultValue=""
+                      required
+                    >
+                      <option value="" disabled hidden>
+                        Select pitch
+                      </option>
+                      {pitches.map((pitch) => (
+                        <option key={pitch._id} value={pitch.name}>
+                          {pitch.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="date"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Date
+                    </label>
+                    <input
+                      type="date"
+                      id="date"
+                      name="date"
+                      min={currentDate}
+                      max="2023-12-31"
+                      className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+                      required
+                    ></input>
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="time"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Time
+                    </label>
+                    <input
+                      type="time"
+                      id="time"
+                      name="time"
+                      min="09:00"
+                      max="22:00"
+                      className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+                      required
+                    ></input>
+                  </div>
+
+                  <div>
+                    <label
+                      htmlFor="description"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Description
+                    </label>
+                    <div className="mt-1">
+                      <textarea
+                        id="description"
+                        name="description"
+                        rows="8"
+                        className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-2 py-1"
+                        placeholder="Description..."
+                        // onChange={handleChange}
+                      ></textarea>
+                    </div>
+                    <p className="mt-2 text-sm text-gray-500">
+                      Brief description for your match.
+                    </p>
+                  </div>
+                </div>
+                <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
+                  <a href="/find-match" className="px-4 text-blue-500">
+                    Cancel
+                  </a>
+
+                  <button
+                    type="submit"
+                    className="inline-flex justify-center rounded-md border border-transparent bg-blue-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  >
+                    Confirm
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
         </div>
-        <br />
-        <div>
-          <label htmlFor="time">Time:</label>
-          <input
-            type="time"
-            id="time"
-            name="time"
-            min="09:00"
-            max="22:00"
-            required
-          ></input>
-        </div>
-        {/* <p>
-        <label for="description">Description:</label>
-      </p>
-      <textarea
-        id="description"
-        name="description"
-        // rows="4"
-        // cols="50"
-        placeholder="Description"
-        onChange={handleChange}
-      ></textarea> */}
-        <br />
-        <div>
-          <button type="submit">Confirm</button>
-        </div>
-      </form>
+      </div>
     </div>
   );
 }
