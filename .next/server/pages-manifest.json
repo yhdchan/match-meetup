@@ -2,7 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
+  "/api/matches/allMatches": "pages/api/matches/allMatches.js",
+  "/news": "pages/news.js",
   "/api/auth/[...nextauth]": "pages/api/auth/[...nextauth].js",
-  "/api/pitches/allPitches": "pages/api/pitches/allPitches.js",
-  "/create-match": "pages/create-match.js"
+  "/find-match": "pages/find-match.js"
 }
