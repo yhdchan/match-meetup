@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 const signup = () => {
   const [newPlayer, setNewPlayer] = useState({
@@ -11,11 +12,13 @@ const signup = () => {
     position: "",
   });
 
-  const handleChange = (event) => {
-    setNewPlayer({ ...newPlayer, [event.target.id]: event.target.value });
-  };
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
 
-  const handleSubmit = async (event) => {
+  const sendToDb = async (event) => {
     try {
       event.preventDefault();
       const res = await fetch("/api/players/addPlayer", {
@@ -27,8 +30,14 @@ const signup = () => {
       const data = await res.json();
     } catch (error) {
       // Do something when error
-      res.json({ error });
+      // res.json({ error });
     }
+  };
+  const onSubmit = (data) => sendToDb(data);
+
+  const handleChange = (event) => {
+    event.preventDefault();
+    setNewPlayer({ ...newPlayer, [event.target.id]: event.target.value });
   };
 
   return (
@@ -43,19 +52,29 @@ const signup = () => {
             </h1>
 
             <p className="mt-6 text-gray-500 sm:text-lg md:text-xl dark:text-gray-400">
-              Create your personal account and begin match meetup
+              Create your personal account to join match meetup!
             </p>
 
-            <form className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="grid grid-cols-1 gap-6 mt-8 md:grid-cols-2"
+            >
               <div>
                 <input
                   id="firstName"
                   type="text"
-                  onChange={handleChange}
+                  onBlur={handleChange}
                   placeholder="First name"
                   className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
-                  required
+                  {...register("firstName", {
+                    required: true,
+                    pattern: /^[A-Za-z\s]*$/g,
+                  })}
                 />
+                {errors.firstName?.type === "required" &&
+                  "● First name is required"}
+                {errors.firstName?.type === "pattern" &&
+                  "● Must only contain letters"}
               </div>
 
               <div>
@@ -65,8 +84,15 @@ const signup = () => {
                   onChange={handleChange}
                   placeholder="Last name"
                   className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
-                  required
+                  {...register("lastName", {
+                    required: true,
+                    pattern: /^[A-Za-z\s]*$/g,
+                  })}
                 />
+                {errors.lastName?.type === "required" &&
+                  "● Last name is required"}
+                {errors.lastName?.type === "pattern" &&
+                  "● Must only contain letters"}
               </div>
 
               <div>
@@ -76,33 +102,58 @@ const signup = () => {
                   onChange={handleChange}
                   placeholder="Username"
                   className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
-                  required
+                  {...register("username", {
+                    required: true,
+                    minLength: 6,
+                    maxLength: 20,
+                  })}
                 />
-                <p className="text-gray-500 text-sm pl-2">
-                  You can use letters, numbers, periods, underscores & dashes
-                </p>
+                {errors.username?.type === "required" &&
+                  "● You must create a username"}
+                {errors.username?.type === "minLength" &&
+                  "● Must contain 6 or more characters"}
+                {errors.username?.type === "maxLength" &&
+                  "● Must not contain more than 20 characters"}
+                <p className="text-gray-500 text-sm pl-2"></p>
               </div>
 
               <div>
                 <input
                   id="postCode"
                   type="text"
-                  onChange={handleChange}
-                  placeholder="Postcode"
+                  onBlur={handleChange}
+                  placeholder="Post code"
                   className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
-                  required
+                  {...register("postCode", {
+                    required: true,
+                    pattern:
+                      /^([A-Z][A-HJ-Y]?[0-9][A-Z0-9]? ?[0-9][A-Z]{2}|GIR ?0A{2})$/gim,
+                  })}
                 />
+                {errors.postCode?.type === "required" &&
+                  "● Post code is required"}
+                {errors.postCode?.type === "pattern" && "● Invalid Post code"}
               </div>
 
               <div>
-                <input
+                <select
                   id="position"
-                  type="text"
+                  className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   onChange={handleChange}
                   placeholder="Position"
-                  className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
-                  required
-                />
+                  {...register("position", {
+                    required: true,
+                  })}
+                >
+                  <option value="1">Goalkeeper</option>
+                  <option value="2">Defender</option>
+                  <option value="3">Midfielder</option>
+                  <option value="4">Attacker</option>
+                </select>
+                {errors.position?.type === "required" &&
+                  "● Position is required"}
+                {errors.position?.type === "pattern" &&
+                  "● Position must be either: goalkeeper, defender, midfielder or attacker"}
               </div>
 
               <div>
@@ -113,9 +164,16 @@ const signup = () => {
                   placeholder="johnsnow@example.com"
                   className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   required
+                  {...register("email", {
+                    required: true,
+                    pattern:
+                      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/gim,
+                  })}
                 />
+                {errors.email?.type === "required" && "● Email is required"}
+                {errors.email?.type === "pattern" && "● Invalid email address"}
                 <p className="text-gray-500 text-sm pl-2">
-                  Use your valid email address
+                  You must have access to the email address
                 </p>
               </div>
 
@@ -127,7 +185,15 @@ const signup = () => {
                   placeholder="Password"
                   className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   required
+                  {...register("password", {
+                    required: true,
+                    minLength: 8,
+                  })}
                 />
+                {errors.password?.type === "required" &&
+                  "● You must create a password"}
+                {errors.password?.type === "minLength" &&
+                  "● Must contain 8 or more characters"}
                 <p className="text-gray-500 text-sm pl-2">
                   Use 8 or more characters with a mix of letters, numbers &
                   symbols
@@ -136,16 +202,14 @@ const signup = () => {
 
               <div>
                 <input
-                  id="comfirmedPassword"
+                  id="comfirmPassword"
                   type="password"
                   // onChange={handleChange}
                   placeholder="Confirm Password"
                   className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   required
                 />
-                <p className="text-gray-500 text-sm pl-2">
-                  Comfirm your password
-                </p>
+                <p className="text-gray-500 text-sm pl-2"></p>
               </div>
 
               <button
