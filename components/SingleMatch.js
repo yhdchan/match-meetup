@@ -4,6 +4,7 @@ import {
   CalendarIcon,
   ClockIcon,
   MapPinIcon,
+  PlusCircleIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
 
@@ -43,6 +44,8 @@ export default function SingleMatch({ match }) {
   let day = dayObj[d.getDay()];
   let month = monthObj[dateArr[1]];
   let hour_12 = time.split(":")[0] < 12 ? time + "AM" : time + "PM";
+  console.log(document.cookie);
+  // const [join, setJoin] = useState(false);
 
   const des = match.pitch.description.split(".");
   console.log(des);
@@ -101,7 +104,7 @@ export default function SingleMatch({ match }) {
                       Created by
                     </p>
                     <p className="mt-1 text-sm text-gray-500 col-span-2 mt-0">
-                      anonym
+                      {match.created_by}
                     </p>
                   </div>
                 </div>
@@ -159,82 +162,168 @@ export default function SingleMatch({ match }) {
             </div>
             <div className="flex flex-row border-t border-gray-200 bg-gray-100">
               <div className="px-4 py-5 w-1/2">
-                <dt className="font-bold text-gray-700 pb-2">Home</dt>
+                <dt className="font-bold text-gray-700 pb-2 tracking-wide">
+                  Home ( {match.homePlayers.length} / 5 )
+                </dt>
                 <dd className="mt-1 text-md text-gray-700">
                   {match.homePlayers.map((player) => {
+                    const avatar = player.img
+                      ? player.img
+                      : "/images/player_avatar/default_avatar.jpeg";
                     return (
-                      <div key={player._id} className="py-1">
-                        <p>{player.username}</p>
-                        <p className="text-sm text-gray-500">
-                          {player.position}
-                        </p>
+                      <div key={player._id} className="flex bg-gray-100 ">
+                        <div className="py-3 pr-2">
+                          <img
+                            src={avatar}
+                            className="h-8 w-8 rounded-full"
+                          ></img>
+                        </div>
+                        <div className="py-1">
+                          <p>{player.username}</p>
+                          <p className="text-sm text-gray-500">
+                            {player.position}
+                          </p>
+                        </div>
                       </div>
                     );
                   })}
                   {match.homePlayers.length < 5 && (
-                    <p className="py-3.5">
-                      <button>Join</button>
-                    </p>
+                    <div className="flex bg-gray-100 ">
+                      <button className="py-3 pr-2">
+                        <PlusCircleIcon className="block h-8 w-8 my-auto" />
+                      </button>
+                      <div className="py-1">
+                        <p>Available</p>
+                        <p className="text-sm text-gray-500">Join Match</p>
+                      </div>
+                    </div>
                   )}
                   {match.homePlayers.length < 4 && (
-                    <p className="py-3.5">
-                      <button>Join</button>
-                    </p>
+                    <div className="flex bg-gray-100 ">
+                      <button className="py-3 pr-2">
+                        <PlusCircleIcon className="block h-8 w-8 my-auto" />
+                      </button>
+                      <div className="py-1">
+                        <p>Available</p>
+                        <p className="text-sm text-gray-500">Join Match</p>
+                      </div>
+                    </div>
                   )}
                   {match.homePlayers.length < 3 && (
-                    <p className="py-3.5">
-                      <button>Join</button>
-                    </p>
+                    <div className="flex bg-gray-100 ">
+                      <button className="py-3 pr-2">
+                        <PlusCircleIcon className="block h-8 w-8 my-auto" />
+                      </button>
+                      <div className="py-1">
+                        <p>Available</p>
+                        <p className="text-sm text-gray-500">Join Match</p>
+                      </div>
+                    </div>
                   )}
                   {match.homePlayers.length < 2 && (
-                    <p className="py-3.5">
-                      <button>Join</button>
-                    </p>
+                    <div className="flex bg-gray-100 ">
+                      <button className="py-3 pr-2">
+                        <PlusCircleIcon className="block h-8 w-8 my-auto" />
+                      </button>
+                      <div className="py-1">
+                        <p>Available</p>
+                        <p className="text-sm text-gray-500">Join Match</p>
+                      </div>
+                    </div>
                   )}
                   {match.homePlayers.length < 1 && (
-                    <p className="py-3.5">
-                      <button>Join</button>
-                    </p>
+                    <div className="flex bg-gray-100 ">
+                      <button className="py-3 pr-2">
+                        <PlusCircleIcon className="block h-8 w-8 my-auto" />
+                      </button>
+                      <div className="py-1">
+                        <p>Available</p>
+                        <p className="text-sm text-gray-500">Join Match</p>
+                      </div>
+                    </div>
                   )}
                 </dd>
               </div>
               <div className="px-4 py-5 w-1/2">
-                <dt className="font-bold text-gray-700 pb-2">Away</dt>
+                <dt className="font-bold text-gray-700 pb-2 tracking-wide">
+                  Away ( {match.awayPlayers.length} / 5 )
+                </dt>
                 <dd className="mt-1 text-md text-gray-700">
                   {match.awayPlayers.map((player) => {
+                    const avatar = player.img
+                      ? player.img
+                      : "/images/player_avatar/default_avatar.jpeg";
                     return (
-                      <div key={player._id} className="py-1">
-                        <p>{player.username}</p>
-                        <p className="text-sm text-gray-500">
-                          {player.position}
-                        </p>
+                      <div key={player._id} className="flex bg-gray-100 ">
+                        <div className="py-3 pr-2">
+                          <img
+                            src={avatar}
+                            className="h-8 w-8 rounded-full"
+                          ></img>
+                        </div>
+                        <div className="py-1">
+                          <p>{player.username}</p>
+                          <p className="text-sm text-gray-500">
+                            {player.position}
+                          </p>
+                        </div>
                       </div>
                     );
                   })}
                   {match.awayPlayers.length < 5 && (
-                    <p className="py-3.5">
-                      <button>Join</button>
-                    </p>
+                    <div className="flex bg-gray-100 ">
+                      <button className="py-3 pr-2">
+                        <PlusCircleIcon className="block h-8 w-8 my-auto" />
+                      </button>
+                      <div className="py-1">
+                        <p>Available</p>
+                        <p className="text-sm text-gray-500">Join Match</p>
+                      </div>
+                    </div>
                   )}
                   {match.awayPlayers.length < 4 && (
-                    <p className="py-3.5">
-                      <button>Join</button>
-                    </p>
+                    <div className="flex bg-gray-100 ">
+                      <button className="py-3 pr-2">
+                        <PlusCircleIcon className="block h-8 w-8 my-auto" />
+                      </button>
+                      <div className="py-1">
+                        <p>Available</p>
+                        <p className="text-sm text-gray-500">Join Match</p>
+                      </div>
+                    </div>
                   )}
                   {match.awayPlayers.length < 3 && (
-                    <p className="py-3.5">
-                      <button>Join</button>
-                    </p>
+                    <div className="flex bg-gray-100 ">
+                      <button className="py-3 pr-2">
+                        <PlusCircleIcon className="block h-8 w-8 my-auto" />
+                      </button>
+                      <div className="py-1">
+                        <p>Available</p>
+                        <p className="text-sm text-gray-500">Join Match</p>
+                      </div>
+                    </div>
                   )}
                   {match.awayPlayers.length < 2 && (
-                    <p className="py-3.5">
-                      <button>Join</button>
-                    </p>
+                    <div className="flex bg-gray-100 ">
+                      <button className="py-3 pr-2">
+                        <PlusCircleIcon className="block h-8 w-8 my-auto" />
+                      </button>
+                      <div className="py-1">
+                        <p>Available</p>
+                        <p className="text-sm text-gray-500">Join Match</p>
+                      </div>
+                    </div>
                   )}
                   {match.awayPlayers.length < 1 && (
-                    <p className="py-3.5">
-                      <button>Join</button>
-                    </p>
+                    <div className="flex bg-gray-100 ">
+                      <button className="py-3 pr-2">
+                        <PlusCircleIcon className="block h-8 w-8 my-auto" />
+                      </button>
+                      <div className="py-1">
+                        <p>Available</p>
+                        <p className="text-sm text-gray-500">Join Match</p>
+                      </div>
+                    </div>
                   )}
                 </dd>
               </div>

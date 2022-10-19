@@ -101,6 +101,9 @@ export default function Nav() {
   // }, [setLoggedInUser]);
 
   // const displayName = userData.username ? userData.username : userData.name;
+  // const handleClick = (e) => {
+  //   console.log(e);
+  // };
 
   return (
     <>
@@ -123,10 +126,11 @@ export default function Nav() {
                     </div>
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
-                        {navigation.map((item) => (
+                        {navigation.map((item, index, arr) => (
                           <a
                             key={item.name}
                             href={item.href}
+                            // onClick={(e) => handleClick(e)}
                             className={classNames(
                               item.current
                                 ? "bg-gray-900 text-white"
