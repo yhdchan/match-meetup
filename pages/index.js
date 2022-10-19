@@ -88,7 +88,7 @@ export default function Home({ articles }) {
                   focus
                   className="absolute inset-x-0 top-0 z-10 origin-top-right transform p-2 transition md:hidden"
                 >
-                  <div className="overflow-hidden rounded-lg bg-white shadow-md ring-1 ring-black ring-opacity-5">
+                  <div className="overflow-hidden rounded-lg bg-white shadow-md ring-1 ring-black ring-opacity-5 dark:bg-gray-800">
                     <div className="flex items-center justify-between px-5 pt-4 w-full">
                       <div className="w-1/3">
                         <h1 className="font-bold text-xl cursor-pointer">
@@ -103,7 +103,7 @@ export default function Home({ articles }) {
                         />
                       </div>
                       <div className="justify-self-end -mr-2">
-                        <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+                        <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 dark:bg-gary-800">
                           <span className="sr-only">Close main menu</span>
                           <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                         </Popover.Button>
@@ -114,7 +114,7 @@ export default function Home({ articles }) {
                         <a
                           key={item.name}
                           href={item.href}
-                          className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900"
+                          className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900 dark:text-gray-500 dark:hover:bg-gray-900 text-gray-500"
                         >
                           {item.name}
                         </a>
@@ -122,7 +122,7 @@ export default function Home({ articles }) {
                     </div>
                     <a
                       href="/signup"
-                      className="block w-full bg-gray-50 px-5 py-3 text-center font-medium text-blue-600 hover:bg-gray-100"
+                      className="block w-full bg-gray-50 px-5 py-3 text-center font-medium text-blue-600 hover:bg-gray-100 dark:bg-gray-700"
                     >
                       Sign up
                     </a>
