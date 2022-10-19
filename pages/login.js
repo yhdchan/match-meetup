@@ -31,12 +31,12 @@ const login = () => {
 
   return (
     <>
-      <div className="relative overflow-hidden bg-white">
+      <div className="relative overflow-hidden bg-inherit">
         <div className="mx-auto max-w-7xl h-full">
-          <div className="relative z-10 bg-white pb-8 sm:pb-16 md:pb-20 lg:w-full lg:max-w-2xl lg:pb-28 xl:pb-32 h-full">
+          <div className="relative z-10 bg-inherit pb-8 sm:pb-16 md:pb-20 lg:w-full lg:max-w-2xl lg:pb-28 xl:pb-32 h-full">
             <main className="mx-auto pt-10 max-w-7xl px-4 sm:pt-12 sm:px-6 md:pt-16 lg:pt-20 lg:px-8 xl:pt-28">
               <div className="sm:text-center lg:text-left">
-                <h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl md:text-5xl">
+                <h1 className="text-2xl font-bold tracking-tight text-inherit sm:text-4xl md:text-5xl">
                   <span className="block xl:inline">Sign in </span>
                 </h1>
                 <p className="mt-3 text-base text-gray-500 sm:mx-auto sm:mt-5 sm:max-w-xl sm:text-lg md:mt-5 md:text-xl lg:mx-0">
@@ -75,7 +75,7 @@ const login = () => {
                         id="checkRemember"
                       />
                       <label
-                        className="form-check-label inline-block text-gray-800"
+                        className="form-check-label inline-block text-gray-500"
                         htmlFor="checkRemember"
                       >
                         Remember me
@@ -98,7 +98,9 @@ const login = () => {
                   </div>
                 </form>
                 <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
-                  <p className="text-center font-semibold mx-4 mb-0">Or</p>
+                  <p className="text-inherit text-center font-semibold mx-4 mb-0">
+                    Or
+                  </p>
                 </div>
                 <div>
                   <button
