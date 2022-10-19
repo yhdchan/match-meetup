@@ -45,7 +45,6 @@ export default function SingleMatch({ match }) {
   let hour_12 = time.split(":")[0] < 12 ? time + "AM" : time + "PM";
 
   const des = match.pitch.description.split(".");
-  console.log(des);
 
   return (
     <section>
