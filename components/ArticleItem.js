@@ -4,18 +4,16 @@ export default function ArticleItem({ article }) {
   const date = article.publishedAt.slice(0, 16).replace("T", " ");
   return (
     <div
-      className={`${articleStyles.flex_box}  bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700`}
+      className={`${articleStyles.flex_box}  bg-gray-800 rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700`}
     >
       <a href={article.image} target="_blank" rel="noopener noreferrer">
         <img className="rounded-t-lg" src={article.image} alt="article image" />
       </a>
       <div className="p-5">
-        <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+        <h5 className="mb-2 text-2xl font-bold tracking-tight text-white">
           {article.title}
         </h5>
-        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-          {date}
-        </p>
+        <p className="mb-3 font-normal text-gray-300">{date}</p>
         <a
           href={article.url}
           target="_blank"

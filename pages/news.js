@@ -4,9 +4,9 @@ import { getLinkPreview } from "link-preview-js";
 export default function News({ articles }) {
   return (
     <div>
-      <header className="bg-white shadow">
+      <header className="bg-inherit">
         <div className="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+          <h1 className="text-3xl font-bold tracking-tight text-inherit">
             Latest Football News
           </h1>
         </div>

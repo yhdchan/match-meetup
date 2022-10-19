@@ -40,21 +40,21 @@ export default function createMatch({ pitches }) {
 
   return (
     <div>
-      <header className="bg-white shadow">
+      <header className="bg-inherit shadow">
         <div className="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+          <h1 className="text-3xl font-bold tracking-tight text-inherit">
             Create a Match
           </h1>
         </div>
       </header>
       <div>
-        <div className="bg-gray-100 md:grid md:grid-cols-3 md:gap-6 py-2">
+        <div className="bg-inherit md:grid md:grid-cols-3 md:gap-6 py-2">
           <div className="md:col-span-1">
             <div className="px-4 sm:px-6 py-2">
-              <h3 className="text-lg font-medium leading-6 text-gray-900">
+              <h3 className="text-lg font-medium leading-6 text-inherit">
                 New Match
               </h3>
-              <p className="mt-1 text-sm text-gray-600">
+              <p className="mt-1 text-sm text-inherit">
                 Please fill out the form completely and click confirm
               </p>
             </div>
@@ -62,11 +62,11 @@ export default function createMatch({ pitches }) {
           <div className="mt-5 md:col-span-2 md:mt-0 px-2">
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="shadow sm:overflow-hidden sm:rounded-md">
-                <div className="space-y-6 bg-white px-4 py-5 sm:p-6">
+                <div className="rounded-md space-y-6 bg-gray-800 px-4 py-5 sm:p-6">
                   <div>
                     <label
                       htmlFor="pitch_name"
-                      className="block text-sm font-medium text-gray-700"
+                      className="block text-sm font-medium text-white"
                     >
                       Pitch
                     </label>
@@ -74,7 +74,7 @@ export default function createMatch({ pitches }) {
                       id="pitch_name"
                       name="pitch_name"
                       autoComplete="pitch-name"
-                      className="mt-1 block w-full rounded-md bg-white border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+                      className="mt-1 block w-full rounded-md bg-inherit border border-gray-300 py-2 px-3 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm bg-gray-500 "
                       defaultValue=""
                       {...register("pitch_name", { required: true })}
                       required
@@ -93,7 +93,7 @@ export default function createMatch({ pitches }) {
                   <div>
                     <label
                       htmlFor="date"
-                      className="block text-sm font-medium text-gray-700"
+                      className="block text-sm font-medium text-white"
                     >
                       Date
                     </label>
@@ -103,8 +103,9 @@ export default function createMatch({ pitches }) {
                       name="date"
                       min={currentDate}
                       max="2023-12-31"
-                      className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+                      className="mt-1 block w-full rounded-md border border-gray-300 bg-inherit py-2 px-3 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm bg-gray-500 "
                       {...register("date", { required: true })}
+
                       required
                     ></input>
                   </div>
@@ -112,7 +113,7 @@ export default function createMatch({ pitches }) {
                   <div>
                     <label
                       htmlFor="time"
-                      className="block text-sm font-medium text-gray-700"
+                      className="bg-inherit block text-sm font-medium text-white"
                     >
                       Time
                     </label>
@@ -122,7 +123,7 @@ export default function createMatch({ pitches }) {
                       name="time"
                       min="09:00"
                       max="22:00"
-                      className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm"
+                      className="mt-1 block w-full rounded-md border border-gray-300 bg-inherit py-2 px-3 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm bg-gray-500 "
                       {...register("time", { required: true })}
                       required
                     ></input>
@@ -131,7 +132,7 @@ export default function createMatch({ pitches }) {
                   <div>
                     <label
                       htmlFor="description"
-                      className="block text-sm font-medium text-gray-700"
+                      className="block text-sm font-medium text-white"
                     >
                       Description
                     </label>
@@ -140,17 +141,17 @@ export default function createMatch({ pitches }) {
                         id="description"
                         name="description"
                         rows="8"
-                        className="mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-2 py-1"
+                        className="bg-gray-500 mt-1 block w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm px-2 py-1"
                         placeholder="Description..."
                         // {...register("description")}
                       ></textarea>
                     </div>
-                    <p className="mt-2 text-sm text-gray-500">
+                    <p className="mt-2 text-sm text-gray-100">
                       Brief description for your match.
                     </p>
                   </div>
                 </div>
-                <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
+                <div className="bg-inherit px-4 py-3 text-right sm:px-6">
                   <a href="/find-match" className="px-4 text-blue-500">
                     Cancel
                   </a>
