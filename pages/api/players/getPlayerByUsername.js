@@ -5,7 +5,6 @@ export default async function getPlayerByUsername(
   { query: { username } },
   res
 ) {
-  // const { username } = req.query;
   try {
     await connectMongo();
     const player = await Player.find({ username: username });
