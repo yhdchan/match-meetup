@@ -30,10 +30,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/find-match.js"
     ],
-    "/find-match/[_id]": [
+    "/news": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/find-match/[_id].js"
+      "static/chunks/pages/news.js"
+    ],
+    "/signup": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/signup.js"
     ]
   },
   "ampFirstPages": []

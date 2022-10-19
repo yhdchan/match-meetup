@@ -1,16 +1,8 @@
-import { useState } from "react";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 
 const signup = () => {
-  const [newPlayer, setNewPlayer] = useState({
-    username: "",
-    firstName: "",
-    lastName: "",
-    postCode: "",
-    email: "",
-    password: "",
-    position: "",
-  });
+  const router = useRouter();
 
   const {
     register,
@@ -18,26 +10,28 @@ const signup = () => {
     handleSubmit,
   } = useForm();
 
-  const sendToDb = async (event) => {
+  const sendToDb = async (newPlayer) => {
     try {
-      event.preventDefault();
       const res = await fetch("/api/players/addPlayer", {
         method: "POST",
         headers: { "Content-type": "application/json" },
         body: JSON.stringify(newPlayer),
       });
-      // Do something when user sign up successfully
-      const data = await res.json();
+      const newPlayerRes = await res.json();
+      if (Object.keys(newPlayerRes).length === 9) router.push(`/find-match`);
     } catch (error) {
-      // Do something when error
-      // res.json({ error });
+      res.json({ error });
     }
   };
-  const onSubmit = (data) => sendToDb(data);
-
-  const handleChange = (event) => {
-    event.preventDefault();
-    setNewPlayer({ ...newPlayer, [event.target.id]: event.target.value });
+  const onSubmit = (data) => {
+    data.position === 1
+      ? (data.position = "goalkeeper")
+      : data.position === 2
+      ? (data.position = "defender")
+      : data.position === 3
+      ? (data.position = "midfielder")
+      : (data.position = "attacker");
+    sendToDb(data);
   };
 
   return (
@@ -63,9 +57,9 @@ const signup = () => {
                 <input
                   id="firstName"
                   type="text"
-                  onBlur={handleChange}
                   placeholder="First name"
                   className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                  ref={register}
                   {...register("firstName", {
                     required: true,
                     pattern: /^[A-Za-z\s]*$/g,
@@ -81,9 +75,9 @@ const signup = () => {
                 <input
                   id="lastName"
                   type="text"
-                  onChange={handleChange}
                   placeholder="Last name"
                   className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                  ref={register}
                   {...register("lastName", {
                     required: true,
                     pattern: /^[A-Za-z\s]*$/g,
@@ -99,9 +93,9 @@ const signup = () => {
                 <input
                   id="username"
                   type="text"
-                  onChange={handleChange}
                   placeholder="Username"
                   className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                  ref={register}
                   {...register("username", {
                     required: true,
                     minLength: 6,
@@ -121,9 +115,9 @@ const signup = () => {
                 <input
                   id="postCode"
                   type="text"
-                  onBlur={handleChange}
                   placeholder="Post code"
                   className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                  ref={register}
                   {...register("postCode", {
                     required: true,
                     pattern:
@@ -139,7 +133,7 @@ const signup = () => {
                 <select
                   id="position"
                   className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
-                  onChange={handleChange}
+                  ref={register}
                   placeholder="Position"
                   {...register("position", {
                     required: true,
@@ -160,9 +154,9 @@ const signup = () => {
                 <input
                   id="email"
                   type="email"
-                  onChange={handleChange}
                   placeholder="johnsnow@example.com"
                   className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                  ref={register}
                   required
                   {...register("email", {
                     required: true,
@@ -181,10 +175,10 @@ const signup = () => {
                 <input
                   id="password"
                   type="password"
-                  onChange={handleChange}
                   placeholder="Password"
                   className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   required
+                  ref={register}
                   {...register("password", {
                     required: true,
                     minLength: 8,
@@ -204,7 +198,6 @@ const signup = () => {
                 <input
                   id="comfirmPassword"
                   type="password"
-                  // onChange={handleChange}
                   placeholder="Confirm Password"
                   className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
                   required
@@ -214,7 +207,6 @@ const signup = () => {
 
               <button
                 type="submit"
-                // onSubmit={handleSubmit}
                 onClick={handleSubmit}
                 className="flex items-center justify-between w-full px-6 py-3 tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
               >

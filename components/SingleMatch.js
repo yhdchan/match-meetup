@@ -50,6 +50,7 @@ export default function SingleMatch({ match }) {
   const { loggedInUser } = useContext(UserContext);
 
   const des = match.pitch.description.split(".");
+
   console.log(loggedInUser);
 
   return (
