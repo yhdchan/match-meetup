@@ -6,6 +6,7 @@ import homeStyles from "../styles/Home.module.css";
 import { Typewriter } from "react-simple-typewriter";
 import Head from "next/head";
 import { getLinkPreview } from "link-preview-js";
+import Image from "next/image";
 
 const navigation = [
   { name: "News", href: "#news" },
@@ -20,11 +21,11 @@ export default function Home({ articles }) {
         <title>Match Meetup</title>
         <meta name="matchMeetup" content="football, match, meetup" />
       </Head>
-      <div className="relative overflow-hidden bg-white">
+      <div className="relative overflow-hidden">
         <div className="mx-auto max-w-7xl">
-          <div className="relative z-10 bg-white pb-8 sm:pb-16 md:pb-20 lg:w-full lg:max-w-2xl lg:pb-28 xl:pb-32">
+          <div className="relative z-10 bg-inherit pb-8 sm:pb-16 md:pb-20 lg:w-full lg:max-w-2xl lg:pb-28 xl:pb-32">
             <svg
-              className="absolute inset-y-0 right-0 hidden h-full w-48 translate-x-1/2 transform text-white lg:block"
+              className="absolute inset-y-0 right-0 hidden h-full w-48 translate-x-1/2 transform text-gray-900 lg:block"
               fill="currentColor"
               viewBox="0 0 100 100"
               preserveAspectRatio="none"
@@ -34,31 +35,27 @@ export default function Home({ articles }) {
             </svg>
 
             <Popover>
-              <div className="relative px-4 pt-6 sm:px-6 lg:px-8">
+              <div className="relative px-4 pt-6 sm:px-6 lg:px-8 bg-gray-800">
                 <nav
                   className="relative flex items-center justify-between shadow-sm sm:h-10 lg:justify-start"
                   aria-label="Global"
                 >
-                  <div className="flex flex-shrink-0 flex-grow items-center lg:flex-grow-0">
+                  <div className="pr-3 flex flex-shrink-0 flex-grow items-center lg:flex-grow-0">
                     <div className="flex w-full items-center justify-between md:w-auto">
                       <Link href="/">
-                        <div className="object-scale-down h-10 w-10 cursor-pointer">
-                          <img
-                            src="/Favicon.ico"
-                            alt="logo"
-                            className="rounded-full"
-                          />
+                        <div className="object-scale-down h-12 w-12 pb-2 cursor-pointer">
+                          <img src="/images/icon2.ico" alt="logo" />
                         </div>
                       </Link>
                       <div className="-mr-2 flex items-center md:hidden">
-                        <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
+                        <Popover.Button className="inline-flex items-center justify-center rounded-md bg-inherit p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
                           <span className="sr-only">Open main menu</span>
                           <Bars3Icon className="h-6 w-6" aria-hidden="true" />
                         </Popover.Button>
                       </div>
                     </div>
                   </div>
-                  <div className="hidden md:ml-10 md:block md:space-x-8 md:pr-4">
+                  <div className="hidden md:ml-10 md:block md:space-x-8 md:pr-4 bg-inherit">
                     {navigation.map((item) => (
                       <a
                         key={item.name}
@@ -136,13 +133,15 @@ export default function Home({ articles }) {
 
             <main className="mx-auto mt-10 max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
               <div className="sm:text-center lg:text-left">
-                <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
-                  <span className="block xl:inline">Welcome to </span>{" "}
+                <h1 className="text-4xl font-bold tracking-tight text-inherit sm:text-5xl md:text-6xl">
+                  <span className="block xl:inline text-inherit">
+                    Welcome to{" "}
+                  </span>{" "}
                   <span className="block text-blue-600 xl:inline">
                     Match Meetup
                   </span>
                 </h1>
-                <p className="mt-3 text-base text-gray-500 sm:mx-auto sm:mt-5 sm:max-w-xl sm:text-lg md:mt-5 md:text-xl lg:mx-0">
+                <p className="mt-3 text-base text-inherit sm:mx-auto sm:mt-5 sm:max-w-xl sm:text-lg md:mt-5 md:text-xl lg:mx-0">
                   Feel Hunger in Football?
                 </p>
                 <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
@@ -215,20 +214,20 @@ export default function Home({ articles }) {
           </div>
         </div> */}
       </div>
-      <div id="about" className="h-screen w-screen">
-        <div className="mx-auto mt-10 max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
+      <div id="about" className="pb-9">
+        <div className="mx-auto mt-1 max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 pb-4">
           <div className="sm:text-center lg:text-left">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
               <span className="block xl:inline">About Us </span>{" "}
             </h1>
-            <h2 className="font-bold tracking-tight text-black sm:text-3xl md:text-4xl">
+            <h2 className="font-bold tracking-tight text-inherit sm:text-3xl md:text-4xl pt-1">
               What is<span className="text-blue-600"> Match Meetup</span>?
             </h2>
-            <p className="mt-3 text-base text-gray-500 sm:mx-auto sm:mt-5 sm:max-w-xl sm:text-lg md:mt-5 md:text-xl lg:mx-0">
+            <p className="mt-3 text-base text-inherit sm:mx-auto sm:mt-5 sm:max-w-xl sm:text-lg md:mt-5 md:text-xl lg:mx-0">
               Match Meetup is an app to find local football players that you can
               organise games with around your local area.
             </p>
-            <p className="pt-10 m-auto">
+            <p className="pt-3 m-auto">
               <span className="text-blue-600 font-semibold">
                 <Typewriter
                   loop
@@ -249,17 +248,17 @@ export default function Home({ articles }) {
         </div>
       </div>
       <div id="contact">
-        <h2 className="text-center font-bold text-4xl py-10 font-bold tracking-tight text-black sm:text-3xl md:text-4xl">
+        <h2 className="pl-4 font-bold text-4xl font-bold tracking-tight text-inherit sm:text-3xl md:text-4xl">
           Contact Us
         </h2>
-        <div className="flex items-center justify-center p-12">
+        <div className="flex items-center justify-center p-4">
           <div className="mx-auto w-full max-w-[550px]">
             {/* action="https://formbold.com/s/FORM_ID" method="POST" */}
             <form>
               <div className="mb-5">
                 <label
                   htmlFor="name"
-                  className="mb-3 block text-base font-medium text-gray-900"
+                  className="mb-3 block text-base font-medium text-inherit"
                 >
                   Full Name
                 </label>
@@ -268,14 +267,14 @@ export default function Home({ articles }) {
                   name="name"
                   id="name"
                   placeholder="Full Name"
-                  className="w-full rounded-md border border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-800 outline-none focus:border-blue-600 focus:shadow-md"
+                  className="w-full rounded-md border border-gray-300 bg-gray py-3 px-6 text-base font-medium text-gray-800 outline-none focus:border-blue-600 focus:shadow-md"
                   required
                 />
               </div>
               <div className="mb-5">
                 <label
                   htmlFor="email"
-                  className="mb-3 block text-base font-medium text-gray-900"
+                  className="mb-3 block text-inherit font-medium text-gray-900 "
                 >
                   Email Address
                 </label>
@@ -284,14 +283,14 @@ export default function Home({ articles }) {
                   name="email"
                   id="email"
                   placeholder="example@domain.com"
-                  className="w-full rounded-md border border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-800 outline-none focus:border-blue-600 focus:shadow-md"
+                  className="w-full rounded-md border border-gray-300 bg-gray py-3 px-6 text-base font-medium text-gray-800 outline-none focus:border-blue-600 focus:shadow-md"
                   required
                 />
               </div>
               <div className="mb-5">
                 <label
                   htmlFor="subject"
-                  className="mb-3 block text-base font-medium text-gray-900"
+                  className="mb-3 block text-base font-medium text-inherit"
                 >
                   Subject
                 </label>
@@ -300,14 +299,14 @@ export default function Home({ articles }) {
                   name="subject"
                   id="subject"
                   placeholder="Enter your subject"
-                  className="w-full rounded-md border border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-800 outline-none focus:border-blue-600 focus:shadow-md"
+                  className="w-full rounded-md border border-gray-300 bg-gray py-3 px-6 text-base font-medium text-gray-800 outline-none focus:border-blue-600 focus:shadow-md"
                   required
                 />
               </div>
               <div className="mb-5">
                 <label
                   htmlFor="message"
-                  className="mb-3 block text-base font-medium text-gray-900"
+                  className="mb-3 block text-base font-medium text-inherit"
                 >
                   Message
                 </label>
@@ -316,13 +315,13 @@ export default function Home({ articles }) {
                   name="message"
                   id="message"
                   placeholder="Type your message"
-                  className="w-full resize-none rounded-md border border-gray-300 bg-white py-3 px-6 text-base font-medium text-gray-800 outline-none focus:border-blue-600 focus:shadow-md"
+                  className="w-full resize-none rounded-md border border-gray-300 bg-gray py-3 px-6 text-base font-medium text-gray-800 outline-none focus:border-blue-600 focus:shadow-md"
                   required
                 ></textarea>
               </div>
-              <div>
-                <button className="hover:shadow-form rounded-md bg-blue-600 py-3 px-8 text-base font-semibold text-white outline-none">
-                  Message
+              <div className="flex items-center justify-center">
+                <button className="hover:shadow-form rounded-md bg-blue-600 py-3 p-8 text-base font-semibold text-white outline-none">
+                  Send Message
                 </button>
               </div>
             </form>
