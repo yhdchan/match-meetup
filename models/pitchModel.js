@@ -12,6 +12,7 @@ const pitchSchema = new Schema({
   freeParking: Boolean,
   latitude: String,
   longitude: String,
+  description: String,
 });
 
 const Pitch = models.Pitch || model("Pitch", pitchSchema);

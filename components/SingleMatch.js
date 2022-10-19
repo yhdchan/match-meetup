@@ -47,6 +47,9 @@ export default function SingleMatch({ match }) {
   console.log(document.cookie);
   // const [join, setJoin] = useState(false);
 
+  const des = match.pitch.description.split(".");
+  console.log(des);
+
   return (
     <section>
       <div className="py-6 px-4 sm:px-6 lg:px-8">
@@ -139,7 +142,11 @@ export default function SingleMatch({ match }) {
                 <div className="bg-white px-4 py-5">
                   <dt className="font-medium text-gray-700">Description</dt>
                   <dd className="mt-1 text-sm text-gray-500 mt-0">
-                    {match.description}
+                    <ul>
+                      {des.map((d) => {
+                        return <li key={d}>- {d}</li>;
+                      })}
+                    </ul>
                   </dd>
                 </div>
               </div>

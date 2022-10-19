@@ -9,7 +9,7 @@ export default function FindMatchCard({ match }) {
       <main>
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
           <div className="lg:p-6 md:w-full flex justify-center mt-10">
-            <div className="w-1/2 gap-y-2 rounded-2xl  overflow-hidden shadow-lg bg-gray-800 text-white">
+            <div className="w-4/5 gap-y-2 rounded-2xl  overflow-hidden shadow-lg bg-gray-800 text-white">
               <img
                 className="w-full"
                 src={`/images/${match.pitch.name}.jpeg`}

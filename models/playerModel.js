@@ -31,6 +31,9 @@ const playerSchema = new Schema({
     type: String,
     required: true,
   },
+  motm_count: {
+    type: Number,
+  },
 });
 
 const Player = models.Player || model("Player", playerSchema);

@@ -2,7 +2,10 @@ import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-// import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
+import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 
 const user = {
   _id: {
@@ -36,6 +39,37 @@ function classNames(...classes) {
 }
 
 export default function Nav() {
+  const { systemTheme, theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const renderThemeChanger = () => {
+    if (!mounted) return null;
+
+    const currentTheme = theme === "system" ? systemTheme : theme;
+
+    if (currentTheme === "dark") {
+      return (
+        <SunIcon
+          className="w-5 h-5 text-gray-400 hover:text-white"
+          role="button"
+          // onClick={setTheme("light")}
+          onClick={() => setTheme("light")}
+        />
+      );
+    } else {
+      return (
+        <MoonIcon
+          className="w-5 h-5 text-gray-400 hover:text-white"
+          role="button"
+          onClick={() => setTheme("dark")}
+        />
+      );
+    }
+  };
   // const [userData, setUserData] = useState(() => {
   //   const user = sessionStorage.getItem("user");
   //   return JSON.parse(user) || null;
@@ -113,6 +147,7 @@ export default function Nav() {
                   </div>
                   <div className="hidden md:block">
                     <div className="ml-4 flex items-center md:ml-6">
+                      <ol className="pr-2">{renderThemeChanger()}</ol>
                       <button
                         type="button"
                         className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -226,6 +261,7 @@ export default function Nav() {
                       <span className="sr-only">View notifications</span>
                       <BellIcon className="h-6 w-6" aria-hidden="true" />
                     </button>
+                    <ol className="pl-1">{renderThemeChanger()}</ol>
                   </div>
                   <div className="mt-3 space-y-1 px-2">
                     {userNavigation.map((item) => (
