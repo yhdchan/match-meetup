@@ -57,12 +57,14 @@ export default function FindMatchList({ matches }) {
             <option value="3">Spaces Remaining(ascending)</option>
             <option value="4">Spaces Remaining(descending)</option>
           </select>
-          <button
-            type="submit"
-            className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full"
-          >
-            Filter
-          </button>
+          <div className="px-28 pt-4">
+            <button
+              type="submit"
+              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-6 rounded-full"
+            >
+              Filter
+            </button>
+          </div>
         </form>
       </header>
       {matchesList.map((match) => (
