@@ -1,9 +1,15 @@
+import { useRouter } from "next/router";
 import playersListStyles from "../styles/PlayersList.module.css";
 
 export default function SinglePlayer({ player }) {
+  const router = useRouter();
   const avatar = player.img
     ? player.img
     : "/images/player_avatar/default_avatar.jpeg";
+
+  const handleClick = () => {
+    router.push(`/players/${player.username}`);
+  };
 
   return (
     <div
@@ -28,7 +34,7 @@ export default function SinglePlayer({ player }) {
       <div className="position text-gray-500 mt-2">
         <p>
           {player.motm_count > 0 ? (
-            <img src="images/motm.png" width={100} />
+            <img src="images/motm.png" width={70} />
           ) : (
             ""
           )}
@@ -41,7 +47,7 @@ export default function SinglePlayer({ player }) {
       <div>
         <p>
           {player.handShake_count > 0 ? (
-            <img src="images/handshake.png" width={100} />
+            <img src="images/handshake.png" width={60} />
           ) : (
             ""
           )}
@@ -51,7 +57,7 @@ export default function SinglePlayer({ player }) {
       <div>
         <p>
           {player.heart_count > 0 ? (
-            <img src="images/heart.png" width={80} />
+            <img src="images/heart.png" width={50} />
           ) : (
             ""
           )}
@@ -60,10 +66,11 @@ export default function SinglePlayer({ player }) {
       <div>{player.heart_count > 0 ? player.heart_count : ""}</div>
       <div className="w-full mt-4">
         <button
-          onClick={() => setLoggedInUser(player)}
+          // onClick={() => setLoggedInUser(player)}
+          onClick={handleClick}
           className="bg-blue-500 py-2 px-4 hover:bg-blue-600 text-white w-full font-semibold rounded-lg shadow-lg"
         >
-          Message
+          Details
         </button>
       </div>
     </div>

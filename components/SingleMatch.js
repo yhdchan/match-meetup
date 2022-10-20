@@ -44,7 +44,7 @@ export default function SingleMatch({ match }) {
   const time = match.date.slice(0, 16).replace("T", " ").split(" ")[1];
   const d = new Date(match.date);
   let day = dayObj[d.getDay()];
-  let month = monthObj[dateArr[1]];
+  let month = monthObj[+dateArr[1]];
   let hour_12 = time.split(":")[0] < 12 ? time + "AM" : time + "PM";
   // console.log(document.cookie, "<--- cookie");
   const { loggedInUser } = useContext(UserContext);
@@ -75,7 +75,7 @@ export default function SingleMatch({ match }) {
                 <div className="flex bg-gray-100 px-4 py-5">
                   <CalendarIcon className="block h-6 w-6 mr-2" />
                   <p className="font-medium text-gray-700">
-                    {day}, {month} {dateArr[2]}, {dateArr[0]}
+                    {day}, {dateArr[2]} {month}, {dateArr[0]}
                   </p>
                 </div>
                 <div className="flex bg-white px-4 py-5">
