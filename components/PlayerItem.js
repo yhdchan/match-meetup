@@ -31,40 +31,58 @@ export default function SinglePlayer({ player }) {
       <div className="position text-gray-500 mt-2">
         <p>{player.position}</p>
       </div>
-      <div className="position text-gray-500 mt-2">
-        <p>
-          {player.motm_count > 0 ? (
-            <img src="images/motm.png" width={70} />
-          ) : (
-            ""
-          )}
-        </p>
+      <div className="flex w-full flex-row justify-center space-x-6">
+        <div className="motm_count text-gray-500 mt-2">
+          <div>
+            {player.motm_count > 0 ? (
+              <div className="flex flex-col">
+                <img src="images/motm.png" className="h-16 w-16" />
+                <p className="text-center">{player.motm_count}</p>
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+        </div>
+        <div className="handShake_count text-gray-500 mt-2">
+          <div>
+            {player.handShake_count > 0 ? (
+              <div>
+                <img src="images/handshake.png" className="h-16 w-16" />
+                <p className="text-center">{player.handShake_count}</p>
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+        </div>
+        <div className="heart_count text-gray-500 mt-4">
+          <div>
+            {player.heart_count > 0 ? (
+              <div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="red"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="red"
+                  class="w-14 h-14"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                  />
+                </svg>
+                <p className="text-center">{player.heart_count}</p>
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+        </div>
       </div>
-      <div>
-        {" "}
-        <p> {player.motm_count > 0 ? player.motm_count : ""}</p>
-      </div>
-      <div>
-        <p>
-          {player.handShake_count > 0 ? (
-            <img src="images/handshake.png" width={60} />
-          ) : (
-            ""
-          )}
-        </p>
-      </div>
-      <div>{player.handShake_count > 0 ? player.handShake_count : ""}</div>
-      <div>
-        <p>
-          {player.heart_count > 0 ? (
-            <img src="images/heart.png" width={50} />
-          ) : (
-            ""
-          )}
-        </p>
-      </div>
-      <div>{player.heart_count > 0 ? player.heart_count : ""}</div>
-      <div className="w-full mt-4">
+      <div className="w-full mt-4 mb-auto">
         <button
           // onClick={() => setLoggedInUser(player)}
           onClick={handleClick}
