@@ -5,9 +5,8 @@ import {
   ClockIcon,
   MapPinIcon,
   PlusCircleIcon,
-  UserIcon,
 } from "@heroicons/react/24/outline";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../contexts/User";
 
 const dayObj = {
@@ -51,9 +50,45 @@ export default function SingleMatch({ match }) {
 
   const des = match.pitch.description.split(".");
 
+  const creator_avatar = match.created_by_username[0].img
+    ? match.created_by_username[0].img
+    : "/images/player_avatar/default_avatar.jpeg";
+
   // console.log(loggedInUser);
   // console.log(match, "<--- match");
-  // console.log(match.created_by_username[0]);
+  const [isJoin, setIsJoin] = useState(false);
+  const [joinIndex, setJoinIndex] = useState(0);
+  const [joinTeam, setJoinTeam] = useState("");
+  let [numberOfHomePlayer, setNumberOfHomePlayer] = useState(
+    match.homePlayers.length
+  );
+
+  const handleJoinHomeTeam = async (e) => {
+    console.log(e.target.parentNode);
+    try {
+      e.preventDefault();
+      setIsJoin(!isJoin);
+      setJoinTeam("home");
+      setJoinIndex(e.target.parentNode.id * 1);
+      setNumberOfHomePlayer((curr) => curr + 1);
+      // await fetch(
+      //   `/api/matches/addMatch?match_id=${match._id}&_id=${loggedInUser._id.$oid}&side=${joinTeam}`,
+      //   {
+      //     method: "PATCH",
+      //     headers: { "Content-type": "application/json" },
+      //     body: JSON.stringify({
+      //       match_id: match._id,
+      //       _id: loggedInUser._id.$oid,
+      //       side: joinTeam,
+      //     }),
+      //   }
+      // );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  console.log(isJoin, joinTeam);
+  console.log(match._id, loggedInUser._id.$oid, joinTeam);
 
   return (
     <section>
@@ -102,14 +137,16 @@ export default function SingleMatch({ match }) {
                   referrerPolicy="no-referrer-when-downgrade"
                   className="border-2 m-0"
                 ></iframe>
-                <div className="flex bg-gray-100 px-4 py-5">
-                  <UserIcon className="block h-6 w-6 mr-2 my-auto" />
-                  <div className="grid gap-2">
-                    <p className="text-sm font-medium text-gray-700">
+                <div className="flex bg-white px-4 py-5">
+                  <img
+                    src={creator_avatar}
+                    className="block h-6 w-6 mr-2 my-auto h-8 w-8 rounded-full"
+                  />
+                  <div className="grid">
+                    <p className="text-sm bg-white font-medium text-gray-700">
                       Created by
                     </p>
                     <p className="mt-1 text-sm text-gray-500 col-span-2 mt-0">
-                      <img src={match.created_by_username[0].img}></img>
                       {match.created_by_username[0].username}
                     </p>
                   </div>
@@ -169,7 +206,7 @@ export default function SingleMatch({ match }) {
             <div className="flex flex-row border-t border-gray-200 bg-gray-100">
               <div className="px-4 py-5 w-1/2">
                 <dt className="font-bold text-gray-700 pb-2 tracking-wide">
-                  Home ( {match.homePlayers.length} / 5 )
+                  Home ( {numberOfHomePlayer} / 5 )
                 </dt>
                 <dd className="mt-1 text-md text-gray-700">
                   {match.homePlayers.map((player) => {
@@ -194,36 +231,141 @@ export default function SingleMatch({ match }) {
                     );
                   })}
                   {match.homePlayers.length < 5 && (
-                    <div className="flex bg-gray-100 ">
-                      <button className="py-3 pr-2">
-                        <PlusCircleIcon className="block h-8 w-8 my-auto" />
-                      </button>
-                      <div className="py-1">
-                        <p>Available</p>
-                        <p className="text-sm text-gray-500">Join Match</p>
-                      </div>
+                    <div>
+                      {isJoin && joinIndex === 1 ? (
+                        <div
+                          key={loggedInUser._id.$oid}
+                          className="flex bg-gray-100 "
+                        >
+                          <div className="py-3 pr-2">
+                            <img
+                              src={loggedInUser.img}
+                              onClick={() => {
+                                setIsJoin(!isJoin);
+                                setJoinTeam("");
+                                setJoinIndex(0);
+                                setNumberOfHomePlayer((curr) => curr - 1);
+                              }}
+                              className="h-8 w-8 rounded-full cursor-pointer"
+                            ></img>
+                          </div>
+                          <div className="py-1">
+                            <p>{loggedInUser.username}</p>
+                            <p className="text-sm text-gray-500">
+                              {loggedInUser.position}
+                            </p>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="flex bg-gray-100 ">
+                          <button
+                            className="py-3 pr-2"
+                            id="1"
+                            onClick={(e) => handleJoinHomeTeam(e)}
+                          >
+                            {
+                              <PlusCircleIcon className="block h-8 w-8 my-auto" />
+                            }
+                          </button>
+                          <div className="py-1">
+                            <p>Available</p>
+                            <p className="text-sm text-gray-500">Join Match</p>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   )}
                   {match.homePlayers.length < 4 && (
-                    <div className="flex bg-gray-100 ">
-                      <button className="py-3 pr-2">
-                        <PlusCircleIcon className="block h-8 w-8 my-auto" />
-                      </button>
-                      <div className="py-1">
-                        <p>Available</p>
-                        <p className="text-sm text-gray-500">Join Match</p>
-                      </div>
+                    <div>
+                      {isJoin && joinIndex === 2 ? (
+                        <div
+                          key={loggedInUser._id.$oid}
+                          className="flex bg-gray-100 "
+                        >
+                          <div className="py-3 pr-2">
+                            <img
+                              src={loggedInUser.img}
+                              onClick={() => {
+                                setIsJoin(!isJoin);
+                                setJoinTeam("");
+                                setJoinIndex(0);
+                                setNumberOfHomePlayer((curr) => curr - 1);
+                                {
+                                  numberOfHomePlayer++;
+                                }
+                              }}
+                              className="h-8 w-8 rounded-full cursor-pointer"
+                            ></img>
+                          </div>
+                          <div className="py-1">
+                            <p>{loggedInUser.username}</p>
+                            <p className="text-sm text-gray-500">
+                              {loggedInUser.position}
+                            </p>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="flex bg-gray-100 ">
+                          <button
+                            className="py-3 pr-2"
+                            id="2"
+                            onClick={(e) => handleJoinHomeTeam(e)}
+                          >
+                            {
+                              <PlusCircleIcon className="block h-8 w-8 my-auto" />
+                            }
+                          </button>
+                          <div className="py-1">
+                            <p>Available</p>
+                            <p className="text-sm text-gray-500">Join Match</p>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   )}
                   {match.homePlayers.length < 3 && (
-                    <div className="flex bg-gray-100 ">
-                      <button className="py-3 pr-2">
-                        <PlusCircleIcon className="block h-8 w-8 my-auto" />
-                      </button>
-                      <div className="py-1">
-                        <p>Available</p>
-                        <p className="text-sm text-gray-500">Join Match</p>
-                      </div>
+                    <div>
+                      {isJoin && joinIndex === 3 ? (
+                        <div
+                          key={loggedInUser._id.$oid}
+                          className="flex bg-gray-100 "
+                        >
+                          <div className="py-3 pr-2">
+                            <img
+                              src={loggedInUser.img}
+                              onClick={() => {
+                                setIsJoin(!isJoin);
+                                setJoinTeam("");
+                                setJoinIndex(0);
+                                setNumberOfHomePlayer((curr) => curr - 1);
+                              }}
+                              className="h-8 w-8 rounded-full cursor-pointer"
+                            ></img>
+                          </div>
+                          <div className="py-1">
+                            <p>{loggedInUser.username}</p>
+                            <p className="text-sm text-gray-500">
+                              {loggedInUser.position}
+                            </p>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="flex bg-gray-100 ">
+                          <button
+                            className="py-3 pr-2"
+                            id="3"
+                            onClick={(e) => handleJoinHomeTeam(e)}
+                          >
+                            {
+                              <PlusCircleIcon className="block h-8 w-8 my-auto" />
+                            }
+                          </button>
+                          <div className="py-1">
+                            <p>Available</p>
+                            <p className="text-sm text-gray-500">Join Match</p>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   )}
                   {match.homePlayers.length < 2 && (

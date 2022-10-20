@@ -105,7 +105,6 @@ export default function createMatch({ pitches }) {
                       max="2023-12-31"
                       className="mt-1 block w-full rounded-md border border-gray-300 bg-inherit py-2 px-3 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-blue-500 sm:text-sm bg-gray-500 "
                       {...register("date", { required: true })}
-
                       required
                     ></input>
                   </div>
