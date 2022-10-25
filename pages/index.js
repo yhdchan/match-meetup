@@ -167,7 +167,7 @@ export default function Home({ articles }) {
         </div>
       </div>
       <div id="news" className="h-full w-full">
-        <h1 className="text-center font-bold text-4xl py-10">
+        <h1 className="text-center font-bold text-4xl pt-16 pb-4">
           Latest Football News
         </h1>
         <div className={homeStyles.container}>
@@ -215,7 +215,7 @@ export default function Home({ articles }) {
         </div> */}
       </div>
       <div id="about" className="pb-9">
-        <div className="mx-auto mt-1 max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 pb-4">
+        <div className="mx-auto mt-1 max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 pb-4 mb-28">
           <div className="sm:text-center lg:text-left">
             <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
               <span className="block xl:inline">About Us </span>{" "}
@@ -248,7 +248,7 @@ export default function Home({ articles }) {
         </div>
       </div>
       <div id="contact">
-        <h2 className="pl-4 font-bold text-4xl font-bold tracking-tight text-inherit sm:text-3xl md:text-4xl">
+        <h2 className="pl-4 font-bold text-center text-4xl font-bold tracking-tight text-inherit sm:text-3xl md:text-4xl">
           Contact Us
         </h2>
         <div className="flex items-center justify-center p-4">
