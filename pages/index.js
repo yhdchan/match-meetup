@@ -6,7 +6,6 @@ import homeStyles from "../styles/Home.module.css";
 import { Typewriter } from "react-simple-typewriter";
 import Head from "next/head";
 import { getLinkPreview } from "link-preview-js";
-import Image from "next/image";
 
 const navigation = [
   { name: "News", href: "#news" },
