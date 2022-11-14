@@ -357,7 +357,13 @@ export const getStaticProps = async () => {
   };
   urlImages = await getImageUrl();
 
-  homeArticles.map((article, i) => (article.image = urlImages[i]));
+  homeArticles.map((article, i) => {
+    if (urlImages[i] !== undefined) {
+      article.image = urlImages[i];
+    } else {
+      article.image = "";
+    }
+  });
 
   return {
     props: { articles: homeArticles },
